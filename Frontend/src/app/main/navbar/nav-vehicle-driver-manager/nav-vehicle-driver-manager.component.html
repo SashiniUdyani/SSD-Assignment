@@ -1,0 +1,91 @@
+<div style="padding-left: 10px;padding-top: 10px;padding-right: 10px;margin-top: 0px">
+
+  <div
+    routerLink="/main/vehicle"
+    (click)="setTopic('Vehicle')"
+    #vehicle="routerLinkActive"
+    routerLinkActive
+    [ngStyle]="{'color':vehicle.isActive?'#c0050e':''}">
+    Vehicle
+  </div>
+
+  <div
+    style="border: 0px;padding: 0px"
+    routerLink="/main/update_vehicle"
+    #updateVehicle="routerLinkActive"
+    routerLinkActive>
+  </div>
+
+  <div
+    routerLink="/main/view_vehicles"
+    (click)="setTopic('View Vehicles')"
+    #viewVehicles="routerLinkActive"
+    routerLinkActive
+    [ngStyle]="{'color':viewVehicles.isActive || updateVehicle.isActive?'#c0050e':''}">
+    View Vehicles
+  </div>
+
+  <div
+    routerLink="/main/vipmember"
+    (click)="setTopic('View Members')"
+    #PassengerDelivery="routerLinkActive"
+    routerLinkActive
+    [ngStyle]="{'color':PassengerDelivery.isActive?'#c0050e':''}">
+    Vip Members
+  </div>
+  <div
+    style="border: 0px;padding: 0px"
+    routerLink="/main/update_vipmember"
+    #updateVipmember="routerLinkActive"
+    routerLinkActive>
+  </div>
+
+  <div
+    routerLink="/main/view_vipmembers"
+    (click)="setTopic('View Vip Members')"
+    #viewVipMembers="routerLinkActive"
+    routerLinkActive
+    [ngStyle]="{'color':viewVipMembers.isActive || updateVipmember.isActive?'#c0050e':''}">
+    View Vip Members
+  </div>
+
+  <div
+    routerLink="/main/driver_vehicle"
+    (click)="setTopic('Driver Vehicle')"
+    #driverVehicle="routerLinkActive"
+    routerLinkActive
+    [ngStyle]="{'color':driverVehicle.isActive?'#c0050e':''}">
+    Driver Vehicle
+  </div>
+
+  <div
+    routerLink="/main/driver_confirm"
+    (click)="setTopic('Driver Confirmation')"
+    #driverConfirm="routerLinkActive"
+    routerLinkActive
+    [ngStyle]="{'color':driverConfirm.isActive?'#c0050e':''}">
+    Driver Confirmation
+  </div>
+
+  <div
+    style="border: 0px;padding: 0px"
+    routerLink="/main/view_driverapproval"
+    #viewDriverapproval="routerLinkActive"
+    routerLinkActive>
+  </div>
+  <div
+    style="border: 0px;padding: 0px"
+    routerLink="/main/vip_report"
+    #vipreport="routerLinkActive"
+    routerLinkActive
+    [ngStyle]="{'color':vipreport.isActive?'#c0050e':''}">
+    Vip Report
+  </div>
+
+
+<!--  <div>-->
+<!--    Vehicle Report-->
+<!--  </div>-->
+  <!--<div style="color: #b56e04">Vehicle</div>-->
+  <!--<div>Driver</div>-->
+</div>

@@ -1,0 +1,128 @@
+<app-alert-box *ngIf="alertBox.alert" [alertMsg]="alertBox"></app-alert-box>
+<div class="row" style="display: flex;justify-content: center">
+  <div class="col-12">
+    <span style="font-size: 25px;font-weight: bold;color: #5d5b5a">Add Vip Member Details</span>
+  </div>
+  <form #vipmemberForm="ngForm" (ngSubmit)="vipmemberForm.form.valid && OnSubmitVipmember()" novalidate>
+    <div style="display: flex;margin-top: 30px">
+      <div style="width: 50%;padding-right: 20px">
+        <div class="row">
+          <div class="col-4">
+            Vip Member Id :
+          </div>
+          <div class="col-8">
+            <input type="text" class="form-control"
+                   [(ngModel)]="vipmemberDetail.vipMemberId"
+                   #vipMemberId="ngModel"
+                   name="vipMemberId" required>
+            <div *ngIf="(vipMemberId.touched || vipmemberForm.submitted) && vipMemberId.errors?.required"
+                 class="validErr">
+              Vip Member Id is required
+            </div>
+          </div>
+        </div>
+        <div class="row" style="margin-top: 10px">
+          <div class="col-4">
+            First Name :
+          </div>
+          <div class="col-8">
+            <input type="text" class="form-control"
+                   [(ngModel)]="vipmemberDetail.firstName"
+                   #firstName="ngModel"
+                   name="firstName" required appTextValidator
+                   placeholder="Enter qualitative value">
+            <div *ngIf="(firstName.touched || vipmemberForm.submitted) && firstName.errors?.required"
+                 class="validErr">
+              First Name is required
+            </div>
+          </div>
+        </div>
+        <div class="row" style="margin-top: 10px">
+          <div class="col-4">
+            Last Name :
+          </div>
+          <div class="col-8">
+            <input type="text" class="form-control"
+                   [(ngModel)]="vipmemberDetail.lastName"
+                   #lastName="ngModel"
+                   name="lastName" required appTextValidator
+                   placeholder="Enter qualitative value">
+            <div *ngIf="(lastName.touched || vipmemberForm.submitted) && lastName.errors?.required"
+                 class="validErr">
+              Last Name is required
+            </div>
+          </div>
+        </div>
+        <div class="row" style="margin-top: 10px">
+          <div class="col-4">
+            Contact Number :
+          </div>
+          <div class="col-8">
+<!--            <input-->
+<!--              formControlName="mobileNumber"-->
+<!--              id="mobileNumber"-->
+<!--              type="text"-->
+<!--              class="form-control">-->
+<!--            <div *ngIf="contactNumber.touched &&contactNumber.invalid" class="alert alert-danger">-->
+<!--              <div *ngIf="contactNumber.errors.required">Mobile Number is required.</div>-->
+<!--              <div *ngIf="contactNumber.errors.pattern">Please, Enter 10 digit Mobile Number.</div>-->
+<!--            </div>-->
+
+            <input type="text" class="form-control"
+                   [(ngModel)]="vipmemberDetail.contactNumber"
+                   #contactNumber="ngModel"
+                   name="contactNumber" required appTelephoneValidator
+                   placeholder="Eg: [ 123-1234567 ]">
+            <div *ngIf="(contactNumber.touched || vipmemberForm.submitted) && contactNumber.errors?.required"
+                 class="validErr">
+              Contact Number is required
+            </div>
+            <div *ngIf="(contactNumber.dirty) && contactNumber.errors?.telephoneInvalid"
+                 class="validErr">
+              Invalid Contact Number
+            </div>
+          </div>
+        </div>
+        <div class="row" style="margin-top: 10px">
+          <div class="col-4">
+            Address :
+          </div>
+          <div class="col-8">
+            <input type="text" class="form-control"
+                   [(ngModel)]="vipmemberDetail.address"
+                   #address="ngModel"
+                   name="address" required>
+            <div *ngIf="(address.touched || vipmemberForm.submitted) && address.errors?.required"
+                 class="validErr">
+              Address is required
+            </div>
+          </div>
+        </div>
+        <div class="row" style="margin-top: 10px">
+          <div class="col-4">
+            Position:
+          </div>
+          <div class="col-8">
+            <input type="text" class="form-control"
+                   [(ngModel)]="vipmemberDetail.position"
+                   #position="ngModel"
+                   name="position" required appTextValidator
+                   placeholder="Enter qualitative value">
+            <div *ngIf="(position.touched || vipmemberForm.submitted) && position.errors?.required"
+                 class="validErr">
+              Position is required
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="row" style="margin-top: 40px;margin-bottom: 40px">
+      <div class="col-12" style="text-align: center">
+        <button type="submit" class="btn btn-warning" style="font-weight: bold">Add VipMember</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+

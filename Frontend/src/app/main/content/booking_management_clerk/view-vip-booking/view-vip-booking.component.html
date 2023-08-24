@@ -1,0 +1,68 @@
+<div class="row">
+  <div class="col-12">
+
+  </div>
+</div>
+
+<div class="row" style="display: flex;justify-content: center">
+  <div class="col-11" style="margin-top: 20px">
+
+    <div style="margin-top: 20px">
+      <span style="font-weight: bold;margin-left: 0px">Search by Vip Booking ID : </span>
+      <input type="text" style="margin-left: 112px;width: 300px;height: 37px" [(ngModel)]="vipBookingId">
+      <button class="btn btn-warning" style="font-weight: bold;margin-left: 20px"
+              (click)="getVipBookingByVipBookingId()">
+        Search
+      </button>
+      <button class="btn btn-warning" style="font-weight: bold;margin-left: 10px" (click)="getAllVipBooking()">
+        All Vip Bookings
+      </button>
+    </div>
+    <div style="margin-top: 20px">
+
+
+    </div>
+
+    <table class="table table-striped" style="margin-top: 40px">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Booking ID</th>
+        <th scope="col" width="8%">Driver ID</th>
+        <th scope="col" width="10%">Vehicle ID</th>
+        <th scope="col">VIP Name</th>
+        <th scope="col" width="10%">Booking Date</th>
+        <th scope="col" width="10%">Booking Time</th>
+        <th scope="col">Booking Status</th>
+        <th scope="col">Destination</th>
+        <th scope="col" width="10%">Purpose</th>
+        <th scope="col" width="10%">Time Period</th>
+        <th scope="col" width="10%">Approved fuel Amount</th>
+        <th scope="col" width="5%">Approval</th>
+        <th scope="col" width="5%" style="text-align: center">Update</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let vipBooking of vipBookings; let i = index">
+        <th scope="row">{{i + 1}}</th>
+        <td>{{vipBooking.booking.bookingId}}</td>
+        <td>{{vipBooking.driver.driverID}}</td>
+        <td>{{vipBooking.vehicle.vehicleId}}</td>
+        <td>{{vipBooking.vipMember.firstName}}</td>
+        <td>{{vipBooking.booking.bookingDate}}</td>
+        <td>{{vipBooking.booking.bookingTime}}</td>
+        <td>{{vipBooking.booking.bookingStatus}}</td>
+        <td>{{vipBooking.booking.destination}}</td>
+        <td>{{vipBooking.purpose}}</td>
+        <td>{{vipBooking.timePeriod}}</td>
+        <td>{{vipBooking.approvedFuelAmount}}</td>
+        <td>{{vipBooking.approval}}</td>
+        <td style="text-align: center">
+          <i class="fas fa-pen" style="cursor: pointer" (click)="goToUpdate(vipBooking)"></i>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>

@@ -1,0 +1,51 @@
+<div style="margin-top: 50px">
+  <div id="pdf">
+    <div style="margin-top: 20px; margin-left: 450px; font-size: 30px">
+      Booking Report
+    </div>
+    <hr style="margin-left: 150px;width:75%; border-bottom: 2px solid black">
+    <div class="row" style="display: flex;justify-content: center">
+      <div class="col-10" style="margin-top: 10px">
+
+        <table class="table table-striped" style="margin-top: 40px">
+          <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Booking ID</th>
+            <th scope="col">Driver ID</th>
+            <th scope="col">Vehicle ID</th>
+            <th scope="col">Booking Date</th>
+            <th scope="col">Booking Time</th>
+            <th scope="col">Booking Status</th>
+            <th scope="col">Destination</th>
+
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let Booking of booking; let i = index">
+            <th scope="row">{{i + 1}}</th>
+            <td>{{Booking.bookingId}}</td>
+            <td>{{Booking.driver.driverID}}</td>
+            <td>{{Booking.vehicle.vehicleId}}</td>
+            <td>{{Booking.bookingDate}}</td>
+            <td>{{Booking.bookingTime}}</td>
+            <td>{{Booking.bookingStatus}}</td>
+            <td>{{Booking.destination}}</td>
+
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div style="margin-top: 20px;margin-left: 420px;">
+
+    <button class="btn btn-warning" style="font-weight: bold;margin-left: 10px" (click)="downloadPdf()">
+      Download Booking Report
+    </button>
+
+  </div>
+
+
+</div>
+

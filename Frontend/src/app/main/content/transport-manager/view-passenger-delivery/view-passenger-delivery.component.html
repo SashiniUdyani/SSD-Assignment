@@ -1,0 +1,129 @@
+<div class="row" style="display: flex;justify-content: center">
+  <div class="col-11" style="margin-top: 20px">
+
+    <div>
+      <span style="font-weight: bold">Search by :</span>
+      <span style="margin-left: 20px">Deliveries for</span>
+      <input type="date" style="margin-left: 20px;height: 37px" [(ngModel)]="deliveryDate">
+      <button class="btn btn-warning" style="font-weight: bold;margin-left: 20px" (click)="getAllDeliveriesByDate()">
+        Search
+      </button>
+    </div>
+
+    <div style="margin-top: 20px">
+      <span style="font-weight: bold;margin-left: 0px">Search by company : </span>
+      <input type="text" style="margin-left: 20px;width: 300px;height: 37px" [(ngModel)]="companyName">
+      <button class="btn btn-warning" style="font-weight: bold;margin-left: 20px" (click)="getAllDeliveriesByCompany()">
+        Search
+      </button>
+
+      <button class="btn btn-warning" style="font-weight: bold;margin-left: 60px" (click)="getAllPassengerDeliveries()">
+        All Deliveries
+      </button>
+    </div>
+
+    <table class="table table-striped" style="margin-top: 40px">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Company</th>
+        <th scope="col">Address</th>
+        <th scope="col" width="10%">Contact No</th>
+        <th scope="col" width="10%">Delivery Date</th>
+        <th scope="col" width="10%">Delivery Time</th>
+        <th scope="col" width="8%">Status</th>
+        <th scope="col" width="8%" style="text-align: center">View More</th>
+        <th scope="col" width="5%" style="text-align: center">Update</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let deliveryPassenger of deliveryPassengerDetails; let i = index">
+        <th scope="row">{{i+1}}</th>
+        <td>{{deliveryPassenger.companyName}}</td>
+        <td>{{deliveryPassenger.address}}</td>
+        <td>{{deliveryPassenger.contactNumber}}</td>
+        <td>{{deliveryPassenger.deliveryDate}}</td>
+        <td>{{deliveryPassenger.deliveryTime}}</td>
+        <td *ngIf="deliveryPassenger.status===0" style="color: #018002;font-weight: bold">
+          Completed
+        </td>
+        <td *ngIf="deliveryPassenger.status===1" style="color: #ff0a03;font-weight: bold">
+          Cancelled
+        </td>
+        <td *ngIf="deliveryPassenger.status===2" style="color: #d29302;font-weight: bold">
+          Pending
+        </td>
+        <td style="text-align: center">
+          <i class="fas fa-search" style="cursor: pointer" (click)="setPassenger(deliveryPassenger)"></i>
+        </td>
+        <td style="text-align: center">
+          <i class="fas fa-pen" style="cursor: pointer" (click)="goToUpdate(deliveryPassenger)"></i>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
+
+<div class="modalTable" [style.visibility]="isModalTable.openTable?'visible':'hidden'">
+  <div (click)="isTrueOrFalse(false)"></div>
+  <div style="">
+    <div style="max-height: calc(100vh - 100px);overflow-y: scroll">
+      <div style="">
+        <i class="fas fa-times" style="cursor: pointer;margin-right: 10px" (click)="isTrueOrFalse(false)"></i>
+      </div>
+
+      <div style="padding-right: 10px">
+
+        <div>
+          <span style="font-weight: bold">Delivery ID : </span>
+          <span style="margin-left: 10px">{{deliveryPassenger.deliveryId}}</span>
+        </div>
+        <div>
+          <span style="font-weight: bold">Delivery person : </span>
+          <span style="margin-left: 10px">{{deliveryPassenger.deliveryPersonName}}</span>
+        </div>
+        <div>
+          <span style="font-weight: bold">Delivery person's NIC : </span>
+          <span style="margin-left: 10px">{{deliveryPassenger.deliveryPersonNic}}</span>
+        </div>
+        <div>
+          <span style="font-weight: bold">Email Address : </span>
+          <span
+            style="margin-left: 10px">{{deliveryPassenger.emailAddress!=''?deliveryPassenger.emailAddress:'N/A'}}</span>
+        </div>
+        <div>
+          <span style="font-weight: bold">Vehicle Number : </span>
+          <span style="margin-left: 10px">{{deliveryPassenger.vehicleNumber!=undefined?deliveryPassenger.vehicleNumber:'N/A'}}</span>
+        </div>
+
+        <div style="margin-top: 30px;font-weight: bold;font-size: 24px">
+          Delivery Passengers
+        </div>
+
+        <table class="table table-striped" style="margin-top: 10px">
+          <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Passenger Name</th>
+            <th scope="col">Passenger NIC</th>
+            <th scope="col">Contact Number</th>
+            <th scope="col">Passenger Type</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let passenger of deliveryPassenger.deliveryPassengerDetails; let i = index">
+            <th scope="row">{{i+1}}</th>
+            <td>{{passenger.passengerName}}</td>
+            <td>{{passenger.passengerNic}}</td>
+            <td>{{passenger.contactNumber}}</td>
+            <td>{{passenger.passengerType}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>

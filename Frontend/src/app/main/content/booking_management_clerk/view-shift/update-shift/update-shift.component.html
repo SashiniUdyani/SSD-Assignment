@@ -1,0 +1,153 @@
+<app-alert-box *ngIf="alertBox.alert" [alertMsg]="alertBox"></app-alert-box>
+<div class="row">
+  <div class="col-12">
+    <span style="font-size: 25px;font-weight: bold;color: #5d5b5a">Update Driver Shift</span>
+  </div>
+</div>
+
+<div class="row" style="display: flex;justify-content: center">
+  <div class="col-11" style="margin-top: 20px">
+
+    <div style="margin-top: 20px">
+      <span style="font-weight: bold;margin-left: 0px">Search by driver : </span>
+      <input type="text" style="margin-left: 20px;width: 300px;height: 37px" [(ngModel)]="driverId">
+      <button class="btn btn-warning" style="font-weight: bold;margin-left: 20px" (click)="getDriveVehicles()">
+        Search
+      </button>
+    </div>
+
+    <table class="table table-striped" style="margin-top: 40px">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Driver ID</th>
+        <th scope="col">Driver Name</th>
+        <th scope="col" width="10%" style="text-align: center">Vehicle No</th>
+        <th scope="col" width="10%" style="text-align: center">Vehicle</th>
+        <th scope="col" width="5%" style="text-align: center">Select</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let driverVehicle of driverVehicles; let i = index">
+        <th scope="row">{{i + 1}}</th>
+        <td>{{driverVehicle.driverVehicleID.driverID}}</td>
+        <td>{{driverVehicle.driver.userAccount.nameWithInitials}}</td>
+        <td style="text-align: center">{{driverVehicle.driverVehicleID.vehicleId}}</td>
+        <td style="text-align: center">{{driverVehicle.vehicle.vehicleType}}</td>
+        <td style="text-align: center">
+          <i class="fas fa-pen" style="cursor: pointer" (click)="selectDriver(driverVehicle)"></i>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
+
+<div class="row" style="display: flex;justify-content: center;margin-top: 50px">
+
+  <form #shiftForm="ngForm" (ngSubmit)="shiftForm.form.valid && onSubmit()" novalidate>
+
+    <div style="display: flex;margin-top: 50px">
+      <div style="width: 50%;padding-right: 20px">
+        <div class="row">
+          <div class="col-4">
+            Driver ID :
+          </div>
+          <div class="col-8">
+            <input type="text" class="form-control"
+                   [(ngModel)]="shift.driverVehicle.driverVehicleID.driverID"
+                   #driverID="ngModel"
+                   name="driverID" required readonly>
+            <div *ngIf="(driverID.touched || shiftForm.submitted) && driverID.errors?.required"
+                 class="validErr">
+              Driver ID is required
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 10px">
+          <div class="col-4">
+            Vehicle Number :
+          </div>
+          <div class="col-8">
+            <input type="text" class="form-control"
+                   [(ngModel)]="shift.driverVehicle.driverVehicleID.vehicleId"
+                   #vehicleId="ngModel"
+                   name="vehicleId" required readonly>
+            <div *ngIf="(vehicleId.touched || shiftForm.submitted) && vehicleId.errors?.required"
+                 class="validErr">
+              Vehicle Number is required
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 10px">
+          <div class="col-4">
+            Shift Date :
+          </div>
+          <div class="col-8">
+            <input type="date" class="form-control"
+                   [(ngModel)]="shift.shiftDate"
+                   #shiftDate="ngModel"
+                   min="{{getMinDate()}}"
+                   name="shiftDate" required>
+            <div *ngIf="(shiftDate.touched || shiftForm.submitted) && shiftDate.errors?.required"
+                 class="validErr">
+              Shift Date is required
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 10px">
+          <div class="col-4">
+            Starting Time :
+          </div>
+          <div class="col-8">
+            <input type="time" class="form-control"
+                   [(ngModel)]="shift.startingTimeActual"
+                   #startingTime="ngModel"
+                   name="startingTime" required>
+            <div *ngIf="(startingTime.touched || shiftForm.submitted) && startingTime.errors?.required"
+                 class="validErr">
+              Starting Time is required
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 10px">
+          <div class="col-4">
+            Ending Time :
+          </div>
+          <div class="col-8">
+            <input type="time" class="form-control"
+                   [(ngModel)]="shift.endingTimeActual"
+                   #endingTime="ngModel"
+                   name="endingTime" required>
+            <div *ngIf="(endingTime.touched || shiftForm.submitted) && endingTime.errors?.required"
+                 class="validErr">
+              Ending Time is required
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class=""
+         style="border-top: 0px solid #dfdfdf;display: flex;margin-top: 20px;padding-top: 20px;margin-bottom: 40px;justify-content: flex-end">
+      <div class="" style="text-align: right">
+        <button type="submit" class="btn btn-success" style="font-weight: bold;font-size: 20px">Update Driver Shift
+        </button>
+      </div>
+      <div class="" style="text-align: right;margin-left: 20px">
+        <button (click)="removeShift()" type="button" class="btn btn-danger" style="font-weight: bold;font-size: 20px">
+          Delete Driver Shift
+        </button>
+      </div>
+    </div>
+
+  </form>
+</div>
+

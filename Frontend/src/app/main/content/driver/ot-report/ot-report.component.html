@@ -1,0 +1,64 @@
+<div class="row" style="display: flex;justify-content: center">
+  <div class="col-11" style="margin-top: 20px">
+
+    <div style="margin-top: 20px">
+      <button class="btn btn-warning" style="font-weight: bold;margin-left: 1070px"
+              (click)="sendToPdf()">
+        Download
+      </button>
+    </div>
+    <div id="pdf">
+      <div style="margin-top: 20px;font-size: 25px">
+        Overtime Report
+      </div>
+      <table style="margin-top: 20px">
+        <tr>
+          <td style="padding-right: 100px">Year : </td>
+          <td>{{currentYear}}</td>
+        </tr>
+        <tr>
+          <td style="padding-right: 100px">Month : </td>
+          <td><div id="demo">{{myFunction()}}</div></td>
+        </tr>
+        <tr>
+          <td style="padding-right: 100px">Date : </td>
+          <td><div ng-app ng-controller="Ctrl">
+            {{myFunction()}}
+            {{date | date:'yyyy-MM-dd'}}
+          </div></td>
+        </tr>
+        <tr>
+          <td style="padding-right: 100px">Driver ID : </td>
+          <td>{{driver.driverID}}</td>
+        </tr>
+        <tr>
+          <td style="padding-right: 100px">Driver Name : </td>
+          <td>{{driver.userAccount.name}}</td>
+        </tr>
+        <tr>
+      </table>
+
+      <table class="table table-striped" style="margin-top: 20px">
+        <thead>
+        <tr>
+          <th scope="col" width="10%">#</th>
+          <th scope="col" width="15%">Date</th>
+          <th scope="col" width="20%">Start Time</th>
+          <th scope="col" width="20%">End Time</th>
+          <th scope="col" width="20%">Approval</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let ots of otDetails; let i = index">
+          <th scope="row">{{i+1}}</th>
+          <td>{{ots.otDate}}</td>
+          <td>{{ots.startTime}}</td>
+          <td>{{ots.endTime}}</td>
+          <td>{{ots.approval}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+

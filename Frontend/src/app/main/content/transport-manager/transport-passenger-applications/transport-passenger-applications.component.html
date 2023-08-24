@@ -1,0 +1,155 @@
+<app-alert-box *ngIf="alertBox.alert" [alertMsg]="alertBox"></app-alert-box>
+<div class="row" style="display: flex;justify-content: center">
+  <div class="col-12">
+    <span style="font-size: 25px;font-weight: bold;color: #5d5b5a">Passenger Transport Applications</span>
+  </div>
+
+  <div class="col-6">
+    <div style="margin-top: 40px" align="center">
+      <span style="font-weight: bold;">Search by passenger : </span>
+      <input type="text" style="margin-left: 20px;width: 300px;height: 37px" #passenger>
+      <button class="btn btn-warning" style="font-weight: bold;margin-left: 20px;margin-right: 40px"
+              (click)="getApprovedApplicationsByPassenger(passenger.value)">
+        Search
+      </button>
+    </div>
+
+
+    <div class="row" style="display: flex;justify-content: center">
+      <div class="col-11" style="margin-top: 40px">
+
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Application ID</th>
+            <th scope="col">Destination</th>
+            <th scope="col">Departure Date</th>
+            <!--<th scope="col">Vehicle Number</th>-->
+            <th scope="col" style="text-align: center">Vehicle Type</th>
+            <th scope="col" width="5%" style="text-align: center">Select</th>
+            <!--<th scope="col" width="5%" style="text-align: center">Update</th>-->
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let application of applicationsP, let i = index">
+            <td>{{i+1}}</td>
+            <td>{{application.applicationID}}</td>
+            <td>{{application.destination}}</td>
+            <td>{{application.depatureDate | date: 'yyyy-MM-dd'}}</td>
+            <!--<td></td>-->
+            <!--<td>{{application.vehicle.vehicleId}}</td>-->
+            <td style="text-align: center">{{application.vehicleType}}</td>
+            <!--<td style="text-align: center">-->
+            <!--<i class="fas fa-search"></i>-->
+            <!--</td>-->
+            <td style="text-align: center" (click)="oldAppId = application">
+              <i class="fas fa-pen"></i>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+
+
+      </div>
+    </div>
+  </div>
+
+  <div class="col-6">
+    <div style="margin-top: 40px" align="center">
+      <span style="font-weight: bold;">Search by destination : </span>
+      <input type="text" style="margin-left: 20px;width: 300px;height: 37px" #destination>
+      <button class="btn btn-warning" style="font-weight: bold;margin-left: 20px;margin-right: 40px"
+              (click)="getApprovedApplicationsByDestination(destination.value)">
+        Search
+      </button>
+      <!--<br>-->
+      <!--<button style="font-weight: bold" class="btn btn-warning" (click)="getApprovedApplications()">-->
+      <!--All Applications-->
+      <!--</button>-->
+    </div>
+
+
+    <div class="row" style="display: flex;justify-content: center">
+      <div class="col-11" style="margin-top: 40px">
+
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Application ID</th>
+            <th scope="col">Destination</th>
+            <th scope="col">Departure Date</th>
+            <!--<th scope="col">Vehicle Number</th>-->
+            <th scope="col" style="text-align: center">Vehicle Type</th>
+            <th scope="col" width="5%" style="text-align: center">View</th>
+            <!--<th scope="col" width="5%" style="text-align: center">Update</th>-->
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let application of applications, let i = index">
+            <td>{{i+1}}</td>
+            <td>{{application.applicationID}}</td>
+            <td>{{application.destination}}</td>
+            <td>{{application.depatureDate | date: 'yyyy-MM-dd'}}</td>
+            <!--<td></td>-->
+            <!--<td>{{application.vehicle.vehicleId}}</td>-->
+            <td style="text-align: center">{{application.vehicleType}}</td>
+            <td style="text-align: center" (click)="viewPassengers(application)">
+              <i class="fas fa-search"></i>
+            </td>
+            <!--<td style="text-align: center">-->
+            <!--<i class="fas fa-pen"></i>-->
+            <!--</td>-->
+          </tr>
+          </tbody>
+        </table>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modalTable" [style.visibility]="isModalTable.openTable?'visible':'hidden'">
+  <div (click)="isTrueOrFalse(false)"></div>
+  <div style="">
+    <div style="max-height: calc(100vh - 100px);overflow-y: scroll">
+      <div style="">
+        <i class="fas fa-times" style="cursor: pointer;margin-right: 10px" (click)="isTrueOrFalse(false)"></i>
+      </div>
+
+      <div style="padding-right: 10px">
+        <div *ngIf="oldAppId!==undefined && newAppId!==undefined">
+          <span style="font-size: 18px">Transfer passenger {{passengerId}} from {{oldAppId.applicationID}} to {{newAppId.applicationID}}</span>
+          <button class="btn btn-warning" style="font-weight: bold;margin-left: 20px;margin-right: 40px"
+                  (click)="changePassengerApplication()">
+            Change
+          </button>
+        </div>
+
+        <table class="table table-striped" style="margin-top: 10px">
+          <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Passenger ID</th>
+            <th scope="col">Passenger Name</th>
+            <th scope="col">Passenger NIC</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let passenger of passengerDetails; let i = index">
+            <th scope="row">{{i+1}}</th>
+            <td>{{passenger.passenger.passengerId}}</td>
+            <td>{{passenger.passenger.userAccount.name}}</td>
+            <td>{{passenger.passenger.userAccount.nic}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+

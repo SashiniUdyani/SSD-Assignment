@@ -1,0 +1,100 @@
+<app-alert-box *ngIf="alertBox.alert" [alertMsg]="alertBox"></app-alert-box>
+<div class="row" style="display: flex;justify-content: center">
+  <div class="col-12">
+    <span style="font-size: 25px;font-weight: bold;color: #5d5b5a">Add Driver Vehicle</span>
+  </div>
+
+  <form #driverVehicleForm="ngForm" (ngSubmit)="driverVehicleForm.form.valid && addDriverVehicle()" novalidate>
+
+    <div style="display: flex;margin-top: 50px">
+      <div style="width: 50%;padding-right: 20px">
+        <div class="row" style="margin-top: 10px">
+          <div class="col-4">
+            Vehicle ID:
+          </div>
+          <div class="col-8">
+            <input type="text" class="form-control"
+                   [(ngModel)]="driverVehicle.vehicle.vehicleId"
+                   #vehicleID="ngModel"
+                   name="vehicleID" required appVehicleNumberValidator
+                   placeholder="Eg: [ 12-1234 / 123-1234 / AB-1234 / ABC 1234 ]">
+            <div *ngIf="(vehicleID.touched || driverVehicleForm.submitted) && vehicleID.errors?.required"
+                 class="validErr">
+              Vehicle ID is required
+            </div>
+            <div *ngIf="(vehicleID.dirty) && vehicleID.errors?.vehicleNumberInvalid"
+                 class="validErr">
+              Invalid Vehicle ID
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 10px">
+          <div class="col-4">
+            Driver ID:
+          </div>
+          <div class="col-8">
+            <input type="text" class="form-control"
+                   [(ngModel)]="driverVehicle.driver.driverID"
+                   #driverID="ngModel"
+                   name="driverID" required appEmployeeIdValidator
+                   placeholder="Eg: [ 12345 ]">
+            <div *ngIf="(driverID.touched || driverVehicleForm.submitted) && driverID.errors?.required"
+                 class="validErr">
+              Driver ID is required
+            </div>
+            <div *ngIf="(driverID.dirty) && driverID.errors?.employeeIdInvalid"
+                 class="validErr">
+              Invalid Driver ID
+            </div>
+          </div>
+        </div>
+
+        <div class=""
+             style="border-top: 0px solid #dfdfdf;display: flex;margin-top: 20px;padding-top: 20px;margin-bottom: 40px;">
+          <div class="col-12" style="text-align: right">
+            <!--            <button [disabled]="vehicleIsPresent!==1 || driverIsPresent!==1" type="submit" class="btn btn-success" style="font-weight: bold;font-size: 20px">Add Details</button>-->
+            <button type="submit" class="btn btn-success" style="font-weight: bold;font-size: 20px;margin-right: 40px">{{btnText}} Driver Vehicle</button>
+            <button type="button" class="btn btn-success" style="font-weight: bold;font-size: 20px" (click)="newDriverVehicle()">New Driver Vehicle</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <div style="width: 100%">
+
+    <table class="table table-striped" style="margin-top: 40px">
+      <thead>
+      <tr>
+        <th scope="col" width="5%">#</th>
+        <th scope="col" width="10%">Vehicle ID</th>
+        <th scope="col" width="10%">Driver ID</th>
+        <th scope="col" width="10%">Driver</th>
+        <th scope="col" width="10%" style="text-align: center">Update</th>
+        <th scope="col" width="10%" style="text-align: center">Delete</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr *ngFor="let driverVehicle of driverVehicles; let i = index">
+        <th scope="row">{{i + 1}}</th>
+        <td>{{driverVehicle.vehicle.vehicleId}}</td>
+        <td>{{driverVehicle.driver.driverID}}</td>
+        <td>{{driverVehicle.driver.userAccount.nameWithInitials}}</td>
+
+        <td style="text-align: center">
+          <i class="fas fa-pen" style="cursor: pointer" (click)="updateDriverVehicle(driverVehicle,i)"></i>
+        </td>
+
+        <td style="text-align: center">
+          <i class="fas fa-trash" style="cursor: pointer"
+             (click)="removeDriverVehicle(driverVehicle,i)"></i>
+        </td>
+
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

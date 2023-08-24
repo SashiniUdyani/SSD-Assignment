@@ -1,0 +1,125 @@
+<div class="row" style="display: flex;justify-content: center">
+  <div class="col-11" style="margin-top: 20px">
+
+    <div style="display: flex" routerLink="/main/delivery_report/weekly_report">
+      <i style="font-size: 30px" class="fas fa-arrow-circle-left"></i>
+      <div style="font-size: 20px;margin-left: 10px;font-weight: bold">Back</div>
+    </div>
+    <button class="btn btn-success" style="font-weight: bold;margin-left: 50px;margin-top: 20px"
+            (click)="sendToPdf()">
+      Download Report
+    </button>
+
+    <div id="pdf1">
+      <div style="margin-top: 40px;font-size: 25px">
+        Daily Deliveries ( from {{getReportDates()}} )
+      </div>
+
+      <table class="table table-striped" style="margin-top: 20px">
+        <thead>
+        <tr>
+          <!--<th scope="col">#</th>-->
+          <th scope="col" width="10%">Day</th>
+          <th scope="col" width="10%">Date</th>
+          <th scope="col" width="20%">Passenger Deliveries</th>
+          <th scope="col" width="20%">Item Deliveries</th>
+          <th scope="col" width="20%">Passenger Item Deliveries</th>
+          <!--<th scope="col" width="5%" style="text-align: center">View</th>-->
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let deliveryItem of dailyDeliveries; let i = index">
+          <!--<th scope="row">{{i+1}}</th>-->
+          <td style="font-weight: bold">{{days[i]}}</td>
+          <td style="font-weight: bold">{{dates[i]}}</td>
+          <td style="font-weight: bold" (click)="goToView(dates[i],'P')">
+            <span style="color: #0c95cb">Total Deliveries - {{deliveryItem[0][0]}}</span> <br>
+            <span style="color: #018002">Completed - {{deliveryItem[0][1]}}</span> <br>
+            <span style="color: #ff0a03">Cancelled - {{deliveryItem[0][2]}}</span> <br>
+            <span style="color: #d29302">Pending - {{deliveryItem[0][3]}}</span>
+          </td>
+          <td style="font-weight: bold" (click)="goToView(dates[i],'I')">
+            <span style="color: #0c95cb">Total Deliveries - {{deliveryItem[1][0]}}</span> <br>
+            <span style="color: #018002">Completed - {{deliveryItem[1][1]}}</span> <br>
+            <span style="color: #ff0a03">Cancelled - {{deliveryItem[1][2]}}</span> <br>
+            <span style="color: #d29302">Pending - {{deliveryItem[1][3]}}</span>
+          </td>
+          <td style="font-weight: bold" (click)="goToView(dates[i],'PI')">
+            <span style="color: #0c95cb">Total Deliveries - {{deliveryItem[2][0]}}</span> <br>
+            <span style="color: #018002">Completed - {{deliveryItem[2][1]}}</span> <br>
+            <span style="color: #ff0a03">Cancelled - {{deliveryItem[2][2]}}</span> <br>
+            <span style="color: #d29302">Pending - {{deliveryItem[2][3]}}</span>
+          </td>
+          <!--<td style="text-align: center">-->
+          <!--<i class="fas fa-search" style="cursor: pointer"></i>-->
+          <!--</td>-->
+          <!--<td style="text-align: center">-->
+          <!--<i class="fas fa-pen" style="cursor: pointer" (click)="goToUpdate(deliveryItem)"></i>-->
+          <!--</td>-->
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div id="pdf2">
+      <div style="margin-top: 40px;font-size: 25px">
+        Passenger Deliveries (Daily)
+      </div>
+
+      <div style="margin-top: 40px">
+        <apx-chart
+          [series]="chartOptionsP.series"
+          [chart]="chartOptionsP.chart"
+          [dataLabels]="chartOptionsP.dataLabels"
+          [plotOptions]="chartOptionsP.plotOptions"
+          [yaxis]="chartOptionsP.yaxis"
+          [fill]="chartOptionsP.fill"
+          [stroke]="chartOptionsP.stroke"
+          [tooltip]="chartOptionsP.tooltip"
+          [xaxis]="chartOptionsP.xaxis"
+        ></apx-chart>
+      </div>
+    </div>
+
+    <div id="pdf3">
+      <div style="margin-top: 40px;font-size: 25px">
+        Item Deliveries (Daily)
+      </div>
+
+      <div style="margin-top: 40px">
+        <apx-chart
+          [series]="chartOptionsI.series"
+          [chart]="chartOptionsI.chart"
+          [dataLabels]="chartOptionsI.dataLabels"
+          [plotOptions]="chartOptionsI.plotOptions"
+          [yaxis]="chartOptionsI.yaxis"
+          [fill]="chartOptionsI.fill"
+          [stroke]="chartOptionsI.stroke"
+          [tooltip]="chartOptionsI.tooltip"
+          [xaxis]="chartOptionsI.xaxis"
+        ></apx-chart>
+      </div>
+    </div>
+
+    <div id="pdf4">
+      <div style="margin-top: 40px;font-size: 25px">
+        Passenger Item Deliveries (Daily)
+      </div>
+
+      <div style="margin-top: 40px">
+        <apx-chart
+          [series]="chartOptionsPI.series"
+          [chart]="chartOptionsPI.chart"
+          [dataLabels]="chartOptionsPI.dataLabels"
+          [plotOptions]="chartOptionsPI.plotOptions"
+          [yaxis]="chartOptionsPI.yaxis"
+          [fill]="chartOptionsPI.fill"
+          [stroke]="chartOptionsPI.stroke"
+          [tooltip]="chartOptionsPI.tooltip"
+          [xaxis]="chartOptionsPI.xaxis"
+        ></apx-chart>
+      </div>
+    </div>
+
+  </div>
+</div>

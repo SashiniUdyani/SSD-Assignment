@@ -1,0 +1,194 @@
+<app-alert-box *ngIf="alertBox.alert" [alertMsg]="alertBox"></app-alert-box>
+<div class="row" style="display: flex;justify-content: center">
+  <div class="col-12">
+    <span style="font-size: 25px;font-weight: bold;color: #5d5b5a">Update Driver Details</span>
+  </div>
+
+  <form #driverRegistrationForm="ngForm" (ngSubmit)="driverRegistrationForm.form.valid && onSubmit()" novalidate>
+
+    <div style="display: flex;margin-top: 50px">
+      <div style="width: 50%;padding-right: 20px">
+        <div class="row">
+          <div class="col-4">
+            Driver Name :
+          </div>
+          <div class="col-8">
+            <input type="text" class="form-control"
+                   [(ngModel)]="driverDetail.userAccount.name"
+                   #name="ngModel"
+                   name="name" required appTextValidator>
+            <div *ngIf="(name.touched || driverRegistrationForm.submitted) && name.errors?.required"
+                 class="validErr">
+              Driver Name is required
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 10px">
+          <div class="col-4">
+            Driver ID :
+          </div>
+          <div class="col-8">
+            <input type="text" class="form-control"
+                   [(ngModel)]="driverDetail.userAccount.employeeID"
+                   #employeeID="ngModel"
+                   name="employeeID" readonly>
+            <div *ngIf="(employeeID.touched || driverRegistrationForm.submitted) && employeeID.errors?.required"
+                 class="validErr">
+              Employee is required
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 10px">
+          <div class="col-4">
+            NIC :
+          </div>
+          <div class="col-8">
+            <input type="text" class="form-control"
+                   [(ngModel)]="driverDetail.userAccount.nic"
+                   #nic="ngModel"
+                   name="nic" readonly>
+            <div *ngIf="(nic.touched || driverRegistrationForm.submitted) && nic.errors?.required"
+                 class="validErr">
+              NIC is required
+            </div>
+            <div *ngIf="(nic.dirty) && nic.errors?.nicInvalid"
+                 class="validErr">
+              Invalid NIC
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 10px">
+          <div class="col-4">
+            Date of Birth :
+          </div>
+          <div class="col-8">
+            <input type="date" class="form-control"
+                   [(ngModel)]="driverDetail.userAccount.dob"
+                   #dob="ngModel"
+                   name="dob" readonly>
+            <div *ngIf="(dob.touched || driverRegistrationForm.submitted) && dob.errors?.required"
+                 class="validErr">
+              Date of Birth is required
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 10px">
+          <div class="col-4">
+            Address :
+          </div>
+          <div class="col-8">
+            <input type="text" class="form-control"
+                   [(ngModel)]="driverDetail.userAccount.address"
+                   #address="ngModel"
+                   name="address" required>
+            <div *ngIf="(address.touched || driverRegistrationForm.submitted) && address.errors?.required"
+                 class="validErr">
+              Address is required
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 10px">
+          <div class="col-4">
+            Contact Number :
+          </div>
+          <div class="col-8">
+            <input type="text" class="form-control"
+                   [(ngModel)]="driverDetail.userAccount.contactNo"
+                   #contactNo="ngModel"
+                   name="contactNo" required appTelephoneValidator>
+            <div *ngIf="(contactNo.touched || driverRegistrationForm.submitted) && contactNo.errors?.required"
+                 class="validErr">
+              Contact Number is required
+            </div>
+            <div *ngIf="(contactNo.dirty) && contactNo.errors?.telephoneInvalid"
+                 class="validErr">
+              Invalid Contact Number
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 10px">
+          <div class="col-4">
+            Email :
+          </div>
+          <div class="col-8">
+            <input type="text" class="form-control"
+                   [(ngModel)]="driverDetail.userAccount.email"
+                   #email="ngModel"
+                   name="email" required appEmailValidator>
+            <div *ngIf="(email.touched || driverRegistrationForm.submitted) && email.errors?.required"
+                 class="validErr">
+              Contact Number is required
+            </div>
+            <div *ngIf="(email.dirty) && email.errors?.emailInvalid"
+                 class="validErr">
+              Invalid Email
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 10px">
+          <div class="col-4">
+            Registering Date :
+          </div>
+          <div class="col-8">
+            <input type="date" class="form-control"
+                   [(ngModel)]="driverDetail.userAccount.registeredDate"
+                   #registeredDate="ngModel"
+                   name="registeredDate" readonly>
+            <div *ngIf="(registeredDate.touched || driverRegistrationForm.submitted) && registeredDate.errors?.required"
+                 class="validErr">
+              Registering Date is required
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 10px">
+          <div class="col-4">
+            Name with Initials :
+          </div>
+          <div class="col-8">
+            <input type="text" class="form-control"
+                   [(ngModel)]="driverDetail.userAccount.nameWithInitials"
+                   #nameWithInitials="ngModel"
+                   name="nameWithInitials" required appTextValidator>
+            <div *ngIf="(nameWithInitials.touched || driverRegistrationForm.submitted) && nameWithInitials.errors?.required"
+                 class="validErr">
+              Name with Initials is required
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 10px">
+          <div class="col-4">
+            License ID :
+          </div>
+          <div class="col-8">
+            <input type="text" class="form-control"
+                   [(ngModel)]="driverDetail.lisenseID"
+                   #lisenseID="ngModel"
+                   name="lisenseID" required>
+            <div *ngIf="(lisenseID.touched || driverRegistrationForm.submitted) && lisenseID.errors?.required"
+                 class="validErr">
+              License ID is required
+            </div>
+          </div>
+        </div>
+
+        <div class=""
+             style="border-top: 0px solid #dfdfdf;display: flex;margin-top: 20px;padding-top: 20px;margin-bottom: 40px">
+          <div class="col-12" style="text-align: right">
+            <button type="submit" class="btn btn-success" style="font-weight: bold;font-size: 20px">Update Details</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+

@@ -1,0 +1,105 @@
+<div style="padding-left: 10px;padding-top: 10px;padding-right: 10px;margin-top: 0px">
+
+  <div
+    routerLink="/main/item_delivery"
+    (click)="setTopic('Item Delivery')"
+    #itemDelivery="routerLinkActive"
+    routerLinkActive
+    [ngStyle]="{'color':itemDelivery.isActive?'#c0050e':''}">
+    Item Delivery
+  </div>
+
+  <div
+    style="border: 0px;padding: 0px"
+    routerLink="/main/update_item_delivery"
+    #updateItemDelivery="routerLinkActive"
+    routerLinkActive>
+  </div>
+
+  <div
+    routerLink="/main/view_item_delivery"
+    (click)="setTopic('View Item Deliveries')"
+    #viewItemDelivery="routerLinkActive"
+    routerLinkActive
+    [ngStyle]="{'color':viewItemDelivery.isActive || updateItemDelivery.isActive?'#c0050e':''}">
+    View Item Deliveries
+  </div>
+
+  <div
+    routerLink="/main/passenger_delivery"
+    (click)="setTopic('Passenger Delivery')"
+    #PassengerDelivery="routerLinkActive"
+    routerLinkActive
+    [ngStyle]="{'color':PassengerDelivery.isActive?'#c0050e':''}">
+    Passenger Delivery
+  </div>
+
+  <div
+    style="border: 0px;padding: 0px"
+    routerLink="/main/update_passenger_delivery"
+    #updatePassengerDelivery="routerLinkActive"
+    routerLinkActive>
+  </div>
+
+  <div
+    routerLink="/main/view_passenger_delivery"
+    (click)="setTopic('View Passenger Deliveries')"
+    #viewPassengerDelivery="routerLinkActive"
+    routerLinkActive
+    [ngStyle]="{'color':viewPassengerDelivery.isActive || updatePassengerDelivery.isActive?'#c0050e':''}">
+    View Passenger Deliveries
+  </div>
+
+  <div
+    style="border: 0px;padding: 0px"
+    routerLink="/main/update_passenger_item_delivery"
+    #updateItemPassengerDelivery="routerLinkActive"
+    routerLinkActive>
+  </div>
+
+  <div
+    routerLink="/main/passenger_item_delivery"
+    (click)="setTopic('Passenger Item Delivery')"
+    #itemPassengerDelivery="routerLinkActive"
+    routerLinkActive
+    [ngStyle]="{'color':itemPassengerDelivery.isActive?'#c0050e':''}">
+    Passenger Item Delivery
+  </div>
+
+  <div
+    routerLink="/main/view_passenger_item_delivery"
+    (click)="setTopic('View Passenger Item Deliveries')"
+    #viewItemPassengerDelivery="routerLinkActive"
+    routerLinkActive
+    [ngStyle]="{'color':viewItemPassengerDelivery.isActive || updateItemPassengerDelivery.isActive?'#c0050e':''}">
+    View Passenger Item Deliveries
+  </div>
+
+  <div
+    routerLink="/main/passenger_transport"
+    (click)="setTopic('Passenger Transport')"
+    #passengerTransport="routerLinkActive"
+    routerLinkActive
+    [ngStyle]="{'color':passengerTransport.isActive?'#c0050e':''}">
+    Passenger Transport
+  </div>
+
+  <!--<div-->
+    <!--routerLink="/main/item_transport"-->
+    <!--(click)="setTopic('Item Transport')"-->
+    <!--#itemTransport="routerLinkActive"-->
+    <!--routerLinkActive-->
+    <!--[ngStyle]="{'color':itemTransport.isActive?'#c0050e':''}">-->
+    <!--Item Transport-->
+  <!--</div>-->
+
+  <div
+    routerLink="/main/delivery_report/weekly_report"
+    (click)="setTopic('Delivery Report')"
+    #deliveryReport="routerLinkActive"
+    routerLinkActive
+    [ngStyle]="{'color':deliveryReport.isActive?'#c0050e':''}">
+    Delivery Report
+  </div>
+
+</div>

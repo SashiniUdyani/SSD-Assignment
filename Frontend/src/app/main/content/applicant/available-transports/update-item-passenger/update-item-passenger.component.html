@@ -1,0 +1,309 @@
+<app-alert-box *ngIf="alertBox.alert" [alertMsg]="alertBox"></app-alert-box>
+<div class="row" style="display: flex;justify-content: center">
+  <div class="col-12">
+    <span style="font-size: 25px;font-weight: bold;color: #5d5b5a">Update Passenger Transports</span>
+  </div>
+
+  <div style="display: flex;margin-top: 50px">
+    <div style="width: 50%;padding-right: 20px">
+      <form #deliveryForm="ngForm" (ngSubmit)="deliveryForm.form.valid && onSubmit()" novalidate>
+        <div class="row">
+          <div class="col-4">
+            Application ID :
+          </div>
+          <div class="col-8">
+            <input type="text" class="form-control"
+                   [(ngModel)]="passengerpassengerApp.applicationID"
+                   #deliveryPersonName="ngModel"
+                   name="deliveryPersonName" required readonly>
+            <div *ngIf="(deliveryPersonName.touched || deliveryForm.submitted) && deliveryPersonName.errors?.required"
+                 class="validErr">
+              Application ID is required
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 10px">
+          <div class="col-4">
+            Destination :
+          </div>
+          <div class="col-8">
+            <input type="text" class="form-control"
+                   [(ngModel)]="passengerpassengerApp.destination"
+                   #deliveryPersonNic="ngModel"
+                   name="deliveryPersonNic" required>
+            <div *ngIf="(deliveryPersonNic.touched || deliveryForm.submitted) && deliveryPersonNic.errors?.required"
+                 class="validErr">
+              Destination is required
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 10px">
+          <div class="col-4">
+            Vehicle Type :
+          </div>
+          <div class="col-8">
+
+            <select name="" id="car" class="form-control" [(ngModel)]="passengerpassengerApp.vehicleType"
+                    #placeFrom="ngModel"
+                    name="placeFrom" required>
+              <option value="Three wheel">Three wheel</option>
+              <option value="Van">Van</option>
+              <option value="Car">Car</option>
+              <option value="Bus">Bus</option>
+            </select>
+            <div *ngIf="(placeFrom.touched || deliveryForm.submitted) && placeFrom.errors?.required"
+                 class="validErr">
+              Vehicle type is required
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 10px">
+          <div class="col-4">
+            Departure Date :
+          </div>
+          <div class="col-8">
+            <input type="datetime-local" class="form-control"
+                   [(ngModel)]="passengerpassengerApp.depatureDate"
+                   #depatureDate1="ngModel"
+                   min="{{getMinDate()}}"
+                   (change)="checkDate()"
+                   name="depatureDate" required>
+            <div *ngIf="(depatureDate1.touched || deliveryForm.submitted) && depatureDate1.errors?.required"
+                 class="validErr">
+              Departure Date is required
+            </div>
+            <div *ngIf="(this.dep==1)"
+                 class="validErr" style="color:red">
+              Departure Date must be less than Arrival date
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 10px">
+          <div class="col-4">
+            Arrival Date :
+          </div>
+          <div class="col-8">
+            <input type="datetime-local" class="form-control"
+                   [(ngModel)]="passengerpassengerApp.arrivaleDate"
+                   #arrivaleDate1="ngModel"
+                   min="{{getMinDate()}}"
+                   (change)="checkDate()"
+                   name="deliveryDate" required>
+            <div *ngIf="(arrivaleDate1.touched || deliveryForm.submitted) && arrivaleDate1.errors?.required"
+                 class="validErr">
+              Arrival Date is required
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 10px">
+          <div class="col-4">
+            Reason :
+          </div>
+          <div class="col-8">
+            <input type="text" class="form-control"
+                   [(ngModel)]="passengerpassengerApp.reason"
+                   #deliveryTime="ngModel"
+                   name="deliveryTime" required>
+            <div *ngIf="(deliveryTime.touched || deliveryForm.submitted) && deliveryTime.errors?.required"
+                 class="validErr">
+              Reason is required
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class=""
+             style="border-top: 0px solid #dfdfdf;display: flex;margin-top: 20px;padding-top: 20px;margin-bottom: 40px">
+          <div *ngIf="viewUpdete===true" class="col-12" style="text-align: right">
+            <button   type="submit" class="btn btn-success" style="font-weight: bold">Update Form
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div style="width: 50%;padding-left: 20px;border-left: 1px solid #dfcda0">
+
+      <form #passengerForm="ngForm" (ngSubmit)="passengerForm.form.valid && onSubmitPassenger()" novalidate>
+        <legend>Add Passengers:
+          <div style="border-top: 1px solid #dfcda0;display: flex;margin-bottom: 10px;padding-top: 20px">
+
+            <div class="row" style="margin-left:0px;">
+              <div class="col-4" style="padding-right: 100px">
+              </div>
+              <div class="col-7" >
+                <input   type="text" class="form-control" style="margin-left: 0px;border: none"
+                         name="x" >
+              </div>
+              <div class="col-4" style="padding-right: 50px">
+                Employee ID :
+              </div>
+              <div class="col-7" >
+                <input type="text" class="form-control"
+                       [(ngModel)]="Pass.passenger.passengerId"
+                       #passengerId="ngModel"
+                       (keyup)="chkPassengerId()"
+                       name="passengerType" required>
+                <div *ngIf="(flag===false)"
+                     class="validErr" style="color:red">
+                  Passenger ID is Not Found
+                </div>
+                <div *ngIf="(flag===true)"
+                     class="validErr" style="color:green">
+                  Passenger ID Found
+                </div>
+              </div>
+
+              <div class="col-1" >
+                <button  style=" background-color: Transparent;background-repeat:no-repeat;border: none; cursor:pointer;overflow: hidden;" >
+                  <i class="fas fa-plus-circle"  style="font-size: 30px"  ></i>
+                </button>
+                <div class="col-8" style="padding-top: 10px " >
+                  <button type="button"  style="font-weight: bold;background-color: Transparent;border: none; margin-right: 20px"><i class="fas fa-user-plus"></i>
+                    <br/>
+                    <label style="font-size: 10px; color: blue"><u>New Account</u></label>
+                  </button>
+                </div>
+              </div>
+              <div class="col-9" style="padding-right: 50px; padding-top: 10px ">
+              </div>
+            </div>
+          </div>
+
+        </legend>
+
+      </form>
+
+      <form #itemForm="ngForm" (ngSubmit)="itemForm.form.valid && onSubmitItem()" novalidate>
+        <legend>Add Items:
+          <div style="border-top: 1px solid #dfcda0;display: flex;margin-bottom: 10px;padding-top: 20px">
+
+            <div class="row" style="margin-left:0px;">
+              <div class="col-4" style="padding-right: 100px">
+              </div>
+              <div class="col-7" >
+                <input   type="text" class="form-control" style="margin-left: 0px;border: none"
+                         name="y" >
+              </div>
+
+              <div class="col-4" style="padding-right: 50px">
+                Item ID :
+              </div>
+              <div class="col-7" >
+                <input   type="text" class="form-control" style="margin-left: 0px" [(ngModel)]="Item.item.itemID"
+                         #ItemId="ngModel"
+                         (keyup)="chkItemId()"
+                         name="ItemId" >
+                <div *ngIf="(duplicate===true)"
+                     class="validErr">
+                  Item Id is duplicated
+                </div>
+              </div>
+
+              <div class="col-1" >
+                <button *ngIf="plus" style=" background-color: Transparent;background-repeat:no-repeat;border: none; cursor:pointer;overflow: hidden;" >
+                  <i class="fas fa-plus-circle"  style="font-size: 30px"  ></i>
+                </button>
+                <button *ngIf="pen"  style=" background-color: Transparent;background-repeat:no-repeat;border: none; cursor:pointer;overflow: hidden;" >
+                  <i  class="fas fa-pen" style="cursor: pointer"  ></i>
+                </button>
+              </div>
+
+              <div class="col-4" style="padding-right: 50px; padding-top: 10px ">
+                Item Name :
+              </div>
+              <div class="col-7" style="padding-top: 10px " >
+                <input type="text" class="form-control" style="margin-left: 0px;  " [(ngModel)]="Item.item.itemName"
+                       #ItemName="ngModel"
+                       name="ItemName" >
+              </div>
+
+              <div class="col-4" style="padding-right: 50px; padding-top: 10px">
+                Quantity :
+              </div>
+              <div class="col-7" style="padding-left:10px; padding-top: 10px " >
+                <input type="number" id="quantity" name="quantity" min="1"  class="form-control" style="padding-right: 10%;"
+                       [(ngModel)]="Item.item.qty"
+                       (focusout)="Item.item.qty = setNumberPositive(Item.item.qty)"
+                       #ItemQty="ngModel"
+                       name="ItemQty" required>
+              </div>
+            </div>
+          </div>
+
+        </legend>
+
+      </form>
+
+    </div>
+  </div>
+
+  <div style="border-top: 1px solid #dfcda0;display: flex;margin-top: 20px;padding-top: 20px">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th scope="col" width="3%">#</th>
+        <th scope="col">Passsenger ID</th>
+        <th scope="col">Passsenger Name</th>
+        <th scope="col">Contact Number</th>
+        <th scope="col" width="5%" style="text-align: center">Remove</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let Passenger of ViewPassenger; let j = index">
+        <th scope="row">{{j+1}}</th>
+        <td>{{Passenger.passenger.passengerId}}</td>
+        <td>{{Passenger.passenger.userAccount.name}}</td>
+        <td>{{Passenger.passenger.userAccount.contactNo}}</td>
+        <td style="text-align: center" (click)="removePassenger(j,Passenger.passenger.passengerId)">
+          <i class="fas fa-times" style="color: red;font-size: 20px"></i>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div style="border-top: 1px solid #dfcda0;display: flex;margin-top: 20px;padding-top: 20px">
+
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th scope="col" width="3%">#</th>
+        <th scope="col">Item ID</th>
+        <th scope="col">Item Name</th>
+        <th scope="col">Item Quantity</th>
+        <th scope="col" width="5%" style="text-align: center">Update</th>
+        <th scope="col" width="5%" style="text-align: center">Remove</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let Pass of ViewItem; let j = index">
+        <th scope="row">{{j+1}}</th>
+        <td>{{Pass.item.itemID}}</td>
+        <td>{{Pass.item.itemName}}</td>
+        <td>{{Pass.item.qty}}</td>
+        <td style="text-align: center">
+          <i class="fas fa-pen" style="font-size: 16px" (click)="setItem(Pass.item,j)"></i>
+        </td>
+        <td style="text-align: center" (click)="removeItem(j,Pass.item.itemID)">
+          <i class="fas fa-times" style="color: red;font-size: 20px"></i>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class=""
+       style="border-top: 0px solid #dfdfdf;display: flex;margin-top: 20px;padding-top: 20px;margin-bottom: 40px">
+    <div class="col-12" style="text-align: right">
+      <button type="button" class="btn btn-danger" style="font-weight: bold;font-size: 20px" (click)="removeForm()">Delete Form</button>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,194 @@
+<app-alert-box *ngIf="alertBox.alert" [alertMsg]="alertBox"></app-alert-box>
+<div class="row">
+  <div class="col-12">
+    <span style="font-size: 25px;font-weight: bold;color: #5d5b5a">Add Application Booking</span>
+  </div>
+</div>
+
+<div class="row" style="display: flex;justify-content: center;margin-top: 0px">
+  <div class="col-11" style="margin-top: 20px">
+
+    <div style="margin-top: 20px">
+      <span style="font-weight: bold;margin-left: 0px">Search by Application ID : </span>
+      <input type="text" style="margin-left: 20px;width: 300px;height: 37px" [(ngModel)]="applicationID">
+      <button class="btn btn-warning" style="font-weight: bold;margin-left: 20px" (click)="getApplicationById()">
+        Search
+      </button>
+      <button class="btn btn-warning" style="font-weight: bold;margin-left: 10px" (click)="getApplication()">
+        All Applications
+      </button>
+    </div>
+
+    <table class="table table-striped" style="margin-top: 40px">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Application ID</th>
+        <th scope="col">Vehicle Type</th>
+        <th scope="col">Departure Date</th>
+        <th scope="col">Arrival Date</th>
+        <th scope="col">Destination</th>
+        <th scope="col" width="5%" style="text-align: center">Type</th>
+        <th scope="col" width="5%" style="text-align: center">Select</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let application of applications; let i = index">
+        <th scope="row">{{i + 1}}</th>
+        <td>{{application.applicationID}}</td>
+        <td>{{application.vehicleType}}</td>
+        <td>{{application.depatureDate}}</td>
+        <td>{{application.arrivaleDate}}</td>
+        <td>{{application.destination}}</td>
+        <td style="text-align: center">
+          <i *ngIf="application.type=='P'||application.type=='IP'" class="fas fa-user"></i>
+          <i *ngIf="application.type=='I'||application.type=='IP'" class="fas fa-truck" style="padding-left: 10px"></i>
+          <i *ngIf="application.type==null" class="fas fa-spinner" style="padding-left: 10px"></i>
+        </td>
+        <td>
+          <i class="fas fa-pen" style="cursor: pointer" (click)="selectApplication(application)"></i>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
+
+<div class="row" style="display: flex;justify-content: center;margin-top: 5px">
+
+  <form #bookingApplicationForm="ngForm" (ngSubmit)="bookingApplicationForm.form.valid && onSubmit()" novalidate>
+
+    <div style="display: flex;margin-top: 50px">
+      <div style="width: 50%;padding-right: 20px">
+
+        <div class="row" style="margin-top: 10px">
+          <div class="col-5">
+            Shift ID :
+          </div>
+          <div class="col-8" style="margin-left: 250px; margin-top: -20px;">
+            <input class="form-control" type="text" readonly [value]="shift.shiftId">
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 10px">
+          <div class="col-5">
+            Shift Date :
+          </div>
+          <div class="col-8" style="margin-left: 250px; margin-top: -20px;">
+            <input class="form-control" type="text" readonly [value]="shift.shiftDate">
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 10px">
+          <div class="col-5">
+            Starting Time :
+          </div>
+          <div class="col-8" style="margin-left: 250px; margin-top: -20px;">
+            <input class="form-control" type="text" readonly [value]="shift.startingTimeActual">
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 10px">
+          <div class="col-5">
+            Ending Time :
+          </div>
+          <div class="col-8" style="margin-left: 250px; margin-top: -20px;">
+            <input class="form-control" type="text" readonly [value]="shift.endingTimeActual">
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 10px">
+          <div class="col-4">
+            Application ID :
+          </div>
+          <div class="col-8" style="margin-left: 250px; margin-top: -20px;">
+            <input type="text" class="form-control"
+                   [(ngModel)]="bookingApplication.application.applicationID"
+                   #applicationIDs="ngModel"
+                   name="applicationID" required readonly>
+            <div *ngIf="(applicationIDs.touched || bookingApplicationForm.submitted) && applicationIDs.errors?.required"
+                 class="validErr">
+              Application ID is required
+            </div>
+          </div>
+        </div>
+
+
+        <div class="row" style="margin-top: 10px">
+          <div class="col-5">
+            Booking Date / Time :
+          </div>
+          <div class="col-8" style="margin-left: 250px; margin-top: -20px;">
+            <input type="datetime-local" class="form-control"
+                   [(ngModel)]="bookingApplication.booking.bookingDateTime"
+                   #bookingDateTime="ngModel"
+                   min="{{getMinDate()}}"
+                   name="bookingDateTime" required>
+            <div
+              *ngIf="(bookingDateTime.touched || bookingApplicationForm.submitted) && bookingDateTime.errors?.required"
+              class="validErr">
+              Booking Date is required
+            </div>
+          </div>
+        </div>
+
+
+        <div class="row" style="margin-top: 20px">
+          <div class="col-5">
+            Booking Status :
+          </div>
+          <div class="col-8" style="margin-left: 250px; margin-top: -20px;">
+            <label>
+              <input name="bookingStatus" type="radio" [value]="true"
+                     [(ngModel)]="bookingApplication.booking.bookingStatus">
+              <span style="font-size: 16px"> Active</span>
+            </label>
+            <label style="margin-left: 40px">
+              <input name="bookingStatus" type="radio" [value]="false"
+                     [(ngModel)]="bookingApplication.booking.bookingStatus">
+              <span style="font-size: 16px"> Inactive</span>
+            </label>
+          </div>
+
+        </div>
+
+
+        <div class="row" style="margin-top: 20px">
+          <div class="col-5">
+            Destination :
+          </div>
+          <div class="col-8" style="margin-left: 250px; margin-top: -20px;">
+            <input type="text" class="form-control"
+                   [(ngModel)]="bookingApplication.booking.destination"
+                   #destination="ngModel"
+                   name="destination" appTextValidator>
+            <div *ngIf="(destination.touched || bookingApplicationForm.submitted) && destination.errors?.required"
+                 class="validErr">
+              Destination is required
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+
+    <div class=""
+         style="border-top: 0px solid #dfdfdf;display: flex;margin-top: 20px;padding-top: 20px;margin-bottom: 40px">
+      <div class="col-12" style="text-align: right">
+        <button type="submit" class="btn btn-success" style="font-weight: bold;font-size: 20px">Add Application
+          Booking
+        </button>
+      </div>
+    </div>
+
+
+  </form>
+</div>
+
+
+
+
+

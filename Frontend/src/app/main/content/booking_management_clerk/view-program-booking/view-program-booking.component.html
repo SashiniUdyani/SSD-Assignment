@@ -1,0 +1,58 @@
+<div class="row" style="display: flex;justify-content: center">
+  <div class="col-11" style="margin-top: 20px">
+
+    <div style="margin-top: 20px">
+      <span style="font-weight: bold;margin-left: 0px">Search by Program Booking ID : </span>
+      <input type="text" style="margin-left: 112px;width: 300px;height: 37px" [(ngModel)]="programBookingId">
+      <button class="btn btn-warning" style="font-weight: bold;margin-left: 20px"
+              (click)="getProgramBookingByProgramBookingId()">
+        Search
+      </button>
+      <button class="btn btn-warning" style="font-weight: bold;margin-left: 10px" (click)="getAllProgramBooking()">
+        All Program Bookings
+      </button>
+    </div>
+    <div style="margin-top: 20px">
+
+
+    </div>
+
+    <table class="table table-striped" style="margin-top: 40px">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Booking ID</th>
+        <th scope="col" width="8%">Driver ID</th>
+        <th scope="col" width="8%">Vehicle ID</th>
+        <th scope="col" width="15%">TV program Name</th>
+        <th scope="col">Booking Date</th>
+        <th scope="col">Booking Time</th>
+        <th scope="col">Booking Status</th>
+        <th scope="col">Destination</th>
+
+
+        <th scope="col" width="10%" style="text-align: center">Update</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let programBooking of programBookings; let i = index">
+        <th scope="row">{{i + 1}}</th>
+        <td>{{programBooking.booking.bookingId}}</td>
+        <td>{{programBooking.driver.driverID}}</td>
+        <td>{{programBooking.vehicle.vehicleId}}</td>
+        <td>{{programBooking.tvProgram.programName}}</td>
+        <td>{{programBooking.booking.bookingDate}}</td>
+        <td>{{programBooking.booking.bookingTime}}</td>
+        <td>{{programBooking.booking.bookingStatus}}</td>
+        <td>{{programBooking.booking.destination}}</td>
+
+
+        <td style="text-align: center">
+          <i class="fas fa-pen" style="cursor: pointer" (click)="goToUpdate(programBooking)"></i>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>

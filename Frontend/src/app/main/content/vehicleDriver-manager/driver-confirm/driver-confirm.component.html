@@ -1,0 +1,114 @@
+<div class="row" style="display: flex;justify-content: center">
+  <div class="col-12">
+    <span style="font-size: 25px;font-weight: bold;color: #5d5b5a">Driver Requests</span>
+  </div>
+  <div class="col-11" style="margin-top: 40px">
+    <span style="font-weight: bold;margin-left: 50px">Search by DriverID : </span>
+    <input type="text" style="margin-left: 20px;width: 300px;height: 37px" [(ngModel)]="driverID">
+    <button class="btn btn-warning" style="font-weight: bold;margin-left: 20px" (click)="getTransportByID()">
+      Search
+    </button>
+
+    <button class="btn btn-warning" style="font-weight: bold;margin-left: 20px" (click)="getDriverRequest()">
+      All Driver Requests
+    </button>
+
+    <br>
+    <br>
+
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Employee Id</th>
+        <th scope="col">Name</th>
+        <!--        <th scope="col">Passenger ID</th>-->
+        <th scope="col">Name ID</th>
+        <!--        <th scope="col"></th>-->
+        <!--        <th scope="col">Approval</th>-->
+        <th scope="col">Address</th>
+        <th scope="col">Contact No</th>
+        <th scope="col">Nic</th>
+        <!--        <th scope="col" style="text-align: center">No of Passengers</th>-->
+        <th scope="col">Email</th>
+        <!--        <th scope="col" width="5%" style="text-align: center">Type</th>-->
+        <!--        <th scope="col" width="5%" style="text-align: center">View</th>-->
+        <th scope="col" width="10%" style="text-align: center">Approval</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let driver of driverDetails; let i = index">
+        <th scope="row">{{i + 1}}</th>
+        <td>{{driver.employeeID}}</td>
+        <td>{{driver.name}}</td>
+        <!--        <td>{{deliveryItem.passengerId}}</td>-->
+        <td>{{driver.nameWithInitials}}</td>
+        <td>{{driver.address}}</td>
+        <!--        <td>{{deliveryItem.approval}}</td>-->
+        <td>{{driver.contactNo}}</td>
+        <td>{{driver.nic}}</td>
+        <!--        <td>{{driver.passengerApplication.noOfPassengers}}</td>-->
+        <td>{{driver.email}}</td>
+        <td style="text-align: center">
+          <i *ngIf="driver.type=='P'||driver.type=='IP'" class="fas fa-user"></i>
+          <i *ngIf="driver.type=='I'||driver.type=='IP'" class="fas fa-truck" style="padding-left: 10px"></i>
+          <i *ngIf="driver.type==null" class="fas fa-spinner" style="padding-left: 10px"></i>
+        </td>
+        <!--        <td style="text-align: center">-->
+        <!--          <i class="fas fa-search" style="cursor: pointer" (click)="setItem(deliveryItem,i)"></i>-->
+        <!--        </td>-->
+        <td style="text-align: center" (click)="setDriver(driver)">
+          <i class="fas fa-pen" style="cursor: pointer"></i>
+        </td>
+
+
+        <!--        <td style="text-align: center">-->
+        <!--          <button type="submit" class="btn btn-success" style="font-weight: bold; margin-right: 20px">Approve</button>-->
+        <!--          <button type="submit" class="btn btn-danger" style="font-weight: bold;" > Deny </button>-->
+        <!--        </td>-->
+      </tr>
+      </tbody>
+    </table>
+
+
+    <!--  </div>-->
+    <!--</div>-->
+
+  </div>
+</div>
+
+<div class="modalTable" [style.visibility]="isModalTable.openTable?'visible':'hidden'">
+  <div (click)="isTrueOrFalse(false)"></div>
+  <div style="">
+    <div style="max-height: calc(100vh - 100px);overflow-y: scroll">
+      <div style="">
+        <i class="fas fa-times" style="cursor: pointer;margin-right: 10px" (click)="isTrueOrFalse(false)"></i>
+      </div>
+
+      <div style="padding-right: 10px">
+        <div style="font-size: 25px;color: green;font-weight: bold"
+             *ngIf="selectedDriver!==undefined?selectedDriver.approved:false">
+          This Driver is approved
+        </div>
+        <div style="font-size: 25px;color: red;font-weight: bold"
+             *ngIf="selectedDriver!==undefined?!selectedDriver.approved:false">
+          This Driver is not approved
+        </div>
+        <div style="font-size: 20px;margin-top: 20px">
+          Do you want to approve or deny this driver?
+        </div>
+        <div style="display: flex;justify-content: center;margin-top: 20px">
+          <button type="submit" class="btn btn-success" style="font-weight: bold; margin-right: 20px"
+                  (click)="approveDriver(true)">Approve
+            <!--            (click)="approveDriver(true)">Approve-->
+          </button>
+          <button type="submit" class="btn btn-danger" style="font-weight: bold;" (click)="approveDriver(false)">
+            Deny
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>

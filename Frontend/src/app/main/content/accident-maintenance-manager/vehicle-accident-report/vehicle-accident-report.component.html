@@ -1,0 +1,53 @@
+<div class="row">
+  <div class="col-12">
+<!--    <span style="font-size: 25px;font-weight: bold;color: #5d5b5a">Accident Report</span>-->
+  </div>
+</div>
+
+<div class="row" style="display: flex;justify-content: center">
+  <div class="col-11" style="margin-top: 20px">
+
+    <div style="width: 100%" id="pdf">
+
+      <div style="margin-top: 20px;font-size: 25px">
+        Accident Report
+      </div>
+
+      <table class="table table-striped" style="margin-top: 40px">
+        <thead>
+        <tr>
+
+          <th scope="col" width="13%">Accident ID</th>
+          <th scope="col" width="10%">Vehicle ID</th>
+          <th scope="col" width="10%">Driver ID</th>
+          <th scope="col" width="10%">Accident Date</th>
+          <th scope="col" width="10%">Accident Time</th>
+          <th scope="col" width="10%">Insurance No</th>
+          <th scope="col" width="10%">Insurance Status</th>
+
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr *ngFor="let vehicleAccident of vehicleAccidentDetails;">
+
+          <td>{{vehicleAccident.vehicleAccidentID}}</td>
+          <td>{{vehicleAccident.vehicle.vehicleId}}</td>
+          <td>{{vehicleAccident.driver.driverID}}</td>
+          <td>{{vehicleAccident.accidentDate}}</td>
+          <td>{{vehicleAccident.accidentTime}}</td>
+          <td>{{vehicleAccident.insuranceNo}}</td>
+          <td>{{vehicleAccident.insuranceStatus}}</td>
+
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <button class="btn btn-warning" style="font-weight: bold;margin-left: 1200px"
+            (click)="sendToPdf()">
+      Download
+    </button>
+  </div>
+</div>
+

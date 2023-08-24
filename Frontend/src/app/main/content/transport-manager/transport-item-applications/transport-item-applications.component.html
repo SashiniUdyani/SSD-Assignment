@@ -1,0 +1,155 @@
+<div class="row" style="display: flex;justify-content: center">
+  <div class="col-12">
+    <span style="font-size: 25px;font-weight: bold;color: #5d5b5a">Item Transport Applications</span>
+  </div>
+
+  <div style="margin-top: 40px" align="center">
+    <span style="font-weight: bold;">Search by destination : </span>
+    <input type="text" style="margin-left: 20px;width: 300px;height: 37px" #destination>
+    <button class="btn btn-warning" style="font-weight: bold;margin-left: 20px;margin-right: 40px" (click)="getApprovedApplicationsByDestination(destination.value)">
+      Search
+    </button>
+    <button style="font-weight: bold" class="btn btn-warning" (click)="getApprovedApplications()">
+      All Applications
+    </button>
+  </div>
+
+
+  <div class="row" style="display: flex;justify-content: center">
+    <div class="col-11" style="margin-top: 40px">
+
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Application ID</th>
+          <th scope="col">Destination</th>
+          <th scope="col">Departure Date</th>
+          <!--<th scope="col">Vehicle Number</th>-->
+          <th scope="col" width="10%" style="text-align: center">Vehicle Type</th>
+          <th scope="col" width="5%" style="text-align: center">View</th>
+          <th scope="col" width="5%" style="text-align: center">Update</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let application of applications, let i = index">
+          <td>{{i+1}}</td>
+          <td>{{application.applicationID}}</td>
+          <td>{{application.destination}}</td>
+          <td>{{application.depatureDate}}</td>
+          <!--<td></td>-->
+          <!--<td>{{application.vehicle.vehicleId}}</td>-->
+          <td style="text-align: center">{{application.vehicleType}}</td>
+          <td style="text-align: center">
+            <i class="fas fa-search"></i>
+          </td>
+          <td style="text-align: center">
+            <i class="fas fa-pen"></i>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+
+
+    </div>
+  </div>
+</div>
+
+<!--<div class="modalTable" [style.visibility]="isModalTable.openTable?'visible':'hidden'">-->
+<!--<div (click)="isTrueOrFalse(false)"></div>-->
+<!--<div style="">-->
+<!--<div style="max-height: calc(100vh - 100px);overflow-y: scroll">-->
+<!--<div style="min-width: 1390px;">-->
+<!--<i class="fas fa-times" style="cursor: pointer" (click)="isTrueOrFalse(false)"></i>-->
+<!--</div>-->
+
+<!--<div class="">-->
+
+<!--</div>-->
+
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+
+<!--<div class="modalTable" [style.visibility]="isModalTable.openTable?'visible':'hidden'">-->
+<!--<div (click)="isTrueOrFalse(false)"></div>-->
+<!--<div style="">-->
+<!--<div style="max-height: calc(100vh - 100px);overflow-y: scroll">-->
+<!--<div style="min-width: 1390px;">-->
+<!--<i class="fas fa-times" style="cursor: pointer;margin-right: 10px" (click)="isTrueOrFalse(false)"></i>-->
+<!--</div>-->
+
+<!--<div class="">-->
+<!--<h1> Passenger Details</h1>-->
+<!--<table class="table table-striped" style="margin-top: 20px">-->
+<!--<thead>-->
+<!--<tr>-->
+<!--<th scope="col">#</th>-->
+<!--<th scope="col">Employee ID</th>-->
+<!--<th scope="col">Employee Name</th>-->
+<!--<th scope="col">Coantact Number</th>-->
+<!--<th scope="col">Email</th>-->
+<!--</tr>-->
+<!--</thead>-->
+<!--<tbody>-->
+<!--&lt;!&ndash;<tr *ngFor="let p of passenger.passengerPassengerApplications; let i = index">&ndash;&gt;-->
+<!--&lt;!&ndash;<th scope="row">{{i+1}}</th>&ndash;&gt;-->
+<!--&lt;!&ndash;<td>{{p.passenger.userAccount.employeeID}}</td>&ndash;&gt;-->
+<!--&lt;!&ndash;<td>{{p.passenger.userAccount.name}}</td>&ndash;&gt;-->
+<!--&lt;!&ndash;<td>{{p.passenger.userAccount.contactNo}}</td>&ndash;&gt;-->
+<!--&lt;!&ndash;<td>{{p.passenger.userAccount.email}}</td>&ndash;&gt;-->
+<!--&lt;!&ndash;</tr>&ndash;&gt;-->
+<!--</tbody>-->
+<!--</table>-->
+
+<!--<h1> Driver Details</h1>-->
+<!--<table class="table table-striped" style="margin-top: 20px">-->
+<!--<thead>-->
+<!--<tr>-->
+<!--<th scope="col">#</th>-->
+<!--<th scope="col">Driver Employee ID</th>-->
+<!--<th scope="col">Driver Name</th>-->
+<!--<th scope="col">Driver Liscence ID</th>-->
+<!--<th scope="col">Driver Contact Number</th>-->
+<!--<th scope="col">Driver Email</th>-->
+<!--</tr>-->
+<!--</thead>-->
+<!--<tbody>-->
+<!--<tr>-->
+<!--<th scope="row">1</th>-->
+<!--<td>{{passenger.driveremployeeID}}</td>-->
+<!--<td>{{passenger.drivername}}</td>-->
+<!--<td>{{passenger.lisenseID}}</td>-->
+<!--<td>{{passenger.drivercontactNo}}</td>-->
+<!--<td>{{passenger.driveremail}}</td>-->
+<!--</tr>-->
+<!--</tbody>-->
+<!--</table>-->
+<!--<h1> Vehicle Details</h1>-->
+<!--<table class="table table-striped" style="margin-top: 20px">-->
+<!--<thead>-->
+<!--<tr>-->
+<!--<th scope="col">#</th>-->
+<!--<th scope="col">Vehicle Id</th>-->
+<!--<th scope="col">Vehicle Type</th>-->
+<!--<th scope="col">Model</th>-->
+<!--<th scope="col">No of Seats</th>-->
+<!--</tr>-->
+<!--</thead>-->
+<!--<tbody>-->
+<!--<tr>-->
+<!--<th scope="row">1</th>-->
+<!--<td>{{passenger.vehicleId}}</td>-->
+<!--<td>{{passenger.vehicleType}}</td>-->
+<!--<td>{{passenger.model}}</td>-->
+<!--<td>{{passenger.noOfSeats}}</td>-->
+<!--</tr>-->
+<!--</tbody>-->
+<!--</table>-->
+<!--</div>-->
+
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+
+

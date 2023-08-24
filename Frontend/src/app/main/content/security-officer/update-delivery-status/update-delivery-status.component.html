@@ -1,0 +1,130 @@
+<app-alert-box *ngIf="alertBox.alert" [alertMsg]="alertBox"></app-alert-box>
+<div class="row" style="display: flex;justify-content: center">
+  <div class="col-12">
+    <span style="font-size: 25px;font-weight: bold;color: #5d5b5a">Update Delivery Status</span>
+  </div>
+
+  <div style="display: flex;margin-top: 50px">
+    <div style="width: 50%;padding-right: 20px">
+      <form #deliveryForm="ngForm" (ngSubmit)="deliveryForm.form.valid && onSubmit()" novalidate>
+        <div class="row">
+          <div class="col-4">
+            Delivery Person Name :
+          </div>
+          <div class="col-8">
+            <input type="text" class="form-control"
+                   [(ngModel)]="deliveryDetail.deliveryPersonName"
+                   #deliveryPersonName="ngModel"
+                   name="deliveryPersonName" readonly>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 10px">
+          <div class="col-4">
+            Delivery Person NIC :
+          </div>
+          <div class="col-8">
+            <input type="text" class="form-control"
+                   [(ngModel)]="deliveryDetail.deliveryPersonNic"
+                   #deliveryPersonNic="ngModel"
+                   name="deliveryPersonNic" readonly>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 10px">
+          <div class="col-4">
+            Contact Number :
+          </div>
+          <div class="col-8">
+            <input type="text" class="form-control"
+                   [(ngModel)]="deliveryDetail.contactNumber"
+                   #contactNumber="ngModel"
+                   name="contactNumber" readonly>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 10px">
+          <div class="col-4">
+            Address :
+          </div>
+          <div class="col-8">
+            <input type="text" class="form-control"
+                   [(ngModel)]="deliveryDetail.address"
+                   #address="ngModel"
+                   name="address" readonly>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 10px">
+          <div class="col-4">
+            Company Name :
+          </div>
+          <div class="col-8">
+            <input type="text" class="form-control"
+                   [(ngModel)]="deliveryDetail.companyName"
+                   #companyName="ngModel"
+                   name="companyName" readonly>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 10px">
+          <div class="col-4">
+            Delivery Date :
+          </div>
+          <div class="col-8">
+            <input type="date" class="form-control"
+                   [(ngModel)]="deliveryDetail.deliveryDate"
+                   #deliveryDate="ngModel"
+                   min="{{getMinDate()}}"
+                   name="deliveryDate" readonly>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 10px">
+          <div class="col-4">
+            Delivery Time :
+          </div>
+          <div class="col-8">
+            <input type="time" class="form-control"
+                   [(ngModel)]="deliveryDetail.deliveryTimeActual"
+                   #deliveryTime="ngModel"
+                   name="deliveryTime" readonly>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 10px">
+          <div class="col-4">
+            Delivery Status :
+          </div>
+          <div class="col-8">
+            <select
+              #deliveryStatus="ngModel"
+              [(ngModel)]="deliveryDetail.deliveryStatus"
+              class="form-control"
+              name="DeliveryStatus" required>
+              <option value="true">Approved</option>
+              <option value="false">Cannot Approved</option>
+            </select>
+            <div *ngIf="(deliveryStatus.touched || deliveryForm.submitted) && deliveryStatus.errors?.required"
+                 class="validErr">
+              Transport Status is required
+            </div>
+          </div>
+        </div>
+
+        <div class=""
+             style="border-top: 0px solid #dfdfdf;display: flex;margin-top: 20px;padding-top: 20px;margin-bottom: 40px">
+          <div class="col-12" style="text-align: right">
+            <button type="submit" class="btn btn-success" style="font-weight: bold">Update Delivery
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div style="border-top: 1px solid #dfcda0;display: flex;margin-top: 20px;padding-top: 20px">
+  </div>
+
+
+</div>

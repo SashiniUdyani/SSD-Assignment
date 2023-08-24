@@ -1,0 +1,15 @@
+<app-nav-transport-manager *ngIf="getUser()['accountType']==='TM'"></app-nav-transport-manager>
+
+<app-nav-vehicle-driver-manager *ngIf="getUser()['accountType']==='VDM'"></app-nav-vehicle-driver-manager>
+
+<app-nav-driver *ngIf="getUser()['accountType']==='DR'"></app-nav-driver>
+
+<app-nav-general-manager *ngIf="getUser()['accountType']==='GM'"></app-nav-general-manager>
+
+<app-nav-applicant *ngIf="getUser()['accountType']==='AP'"></app-nav-applicant>
+
+<app-nav-accident-maintenance-manager *ngIf="getUser()['accountType']==='VMC'"></app-nav-accident-maintenance-manager>
+
+<app-nav-security-officer *ngIf="getUser()['accountType']==='SO'"></app-nav-security-officer>
+
+<app-nav-booking-manager *ngIf="getUser()['accountType']==='BMC'"></app-nav-booking-manager>

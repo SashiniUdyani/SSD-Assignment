@@ -1,0 +1,63 @@
+<app-alert-box *ngIf="alertBox.alert" [alertMsg]="alertBox"></app-alert-box>
+<div class="row">
+  <div class="col-12">
+
+  </div>
+</div>
+
+<div class="row" style="display: flex;justify-content: center">
+  <div class="col-11" style="margin-top: 20px">
+
+    <span style="font-weight: bold;margin-left: 50px">Search by Token ID : </span>
+    <input type="search" placeholder="Enter TokenID.."
+           style="margin-left: 20px;width: 300px;height: 37px" [(ngModel)]="tokenIdSearch">
+    <button class="btn btn-warning" style="font-weight: bold;margin-left: 20px" (click)="getTokenByID()">
+      Search
+    </button>
+
+    <button class="btn btn-warning" style="font-weight: bold;margin-left: 20px" (click)="getAllTokens()">
+      All Incomplete Trips
+    </button><br><br><br>
+
+    <div style="width: 100%">
+
+      <table class="table table-striped">
+        <thead  style="text-align: center">
+        <tr>
+          <th scope="col" width="5%">#</th>
+          <th scope="col" width="20%">Token ID</th>
+          <th scope="col">Departure Date</th>
+          <th scope="col">Departure Time</th>
+          <th scope="col">Transport Status</th>
+          <th scope="col" width="10%" >Action</th>
+          <th scope="col" width="10%" >Delete</th>
+        </tr>
+        </thead>
+        <tbody  style="text-align: center">
+        <tr *ngFor="let tokenDetail of tokens; let i = index">
+          <th scope="row">{{i+1}}</th>
+          <td>{{tokenDetail.tokenID}}</td>
+          <td>{{tokenDetail.departureDate}}</td>
+          <td>{{tokenDetail.departureTime}}</td>
+          <td *ngIf="tokenDetail.transportStatus===false">
+            <i class="fas fa-hourglass-end fa-lg" title="Pending"></i>
+          </td>
+
+          <td *ngIf="tokenDetail.meterDetail.meterId===null" style="text-align: center">
+            <i class="fas fa-tachometer-alt fa-lg" style="cursor: pointer" title="Add Meter" (click)="goToMeter(tokenDetail)"></i>
+          </td>
+          <td *ngIf="tokenDetail.meterDetail.meterId!==null" style="text-align: center">
+            <i class="fas fa-pen" style="cursor: pointer" title="Update Details" (click)="goToUpdate(tokenDetail)"></i>
+          </td>
+          <td *ngIf="tokenDetail.meterDetail.meterId===null" style="text-align: center" >
+            <i class="fas fa-trash" style="cursor: pointer" title="Delete Token"  (click)="removeToken(tokenDetail.tokenID,i)" ></i>
+          </td>
+          <td *ngIf="tokenDetail.meterDetail.meterId!==null" style="text-align: center" >
+            <i class="fas fa-trash" style="cursor: not-allowed;color: gray"></i>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+  </div>

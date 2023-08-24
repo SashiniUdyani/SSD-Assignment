@@ -1,0 +1,54 @@
+<div class="row" style="display: flex;justify-content: center">
+  <div class="col-11" style="margin-top: 20px">
+
+  <div>
+      <div id="pdf">
+        <div style="margin-top: 20px; margin-left: 500px; font-size: 25px">
+          User Accounts Report
+        </div>
+
+
+      <table class="table table-striped" style="margin-top: 40px">
+        <thead>
+        <tr>
+          <th scope="col" width="9%">Employee ID</th>
+          <th scope="col" width="4%">Type</th>
+          <th scope="col" width="7%">Name</th>
+          <th scope="col" width="10%">Name With Initials</th>
+          <th scope="col" width="8%">NIC</th>
+          <th scope="col" width="14%">Address</th>
+          <th scope="col" width="10%">Contact No</th>
+          <th scope="col" width="10%">Email</th>
+          <th scope="col" width="10%" >Registered Date</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let userAccount of userAccountDetails;">
+          <td>{{userAccount.employeeID}}</td>
+          <td>{{userAccount.accountType}}</td>
+          <td>{{userAccount.name}}</td>
+          <td>{{userAccount.nameWithInitials}}</td>
+          <td>{{userAccount.nic}}</td>
+          <td>{{userAccount.address}}</td>
+          <td>{{userAccount.contactNo}}</td>
+          <td>{{userAccount.email}}</td>
+          <td>{{userAccount.registeredDate}}</td>
+
+
+        </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+
+    <button class="btn btn-warning" style="font-weight: bold;margin-left: 1100px"
+            (click)="sendToPdf()">
+      Download
+    </button>
+    <br>
+    <br>
+  </div>
+</div>
+

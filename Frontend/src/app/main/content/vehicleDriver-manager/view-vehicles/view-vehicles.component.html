@@ -1,0 +1,134 @@
+<div class="row">
+  <div class="col-12">
+
+  </div>
+</div>
+
+<div class="row" style="display: flex;justify-content: center">
+  <div class="col-11" style="margin-top: 20px">
+
+    <span style="font-weight: bold;margin-left: 50px">Search by vehicle number : </span>
+    <input type="text" placeholder="Enter Vehicle Number..." style="margin-left: 20px;width: 300px;height: 37px" [(ngModel)]="vehicleNumber">
+    <button class="btn btn-warning" style="font-weight: bold;margin-left: 20px" (click)="getVehicleByNumber()">
+      Search
+    </button>
+
+    <button class="btn btn-warning" style="font-weight: bold;margin-left: 20px" (click)="getAllVehicles()">
+      All vehicles
+    </button>
+
+    <table id="table" class="table table-striped" style="margin-top: 40px">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col" width="20%">Vehicle Number</th>
+        <th scope="col">Vehicle Category</th>
+        <th scope="col">Vehicle Type</th>
+        <th scope="col" width="10%">No Of Seats</th>
+        <th scope="col" width="10%">Fuel Type</th>
+        <th scope="col" width="5%" style="text-align: center">View</th>
+        <th scope="col" width="5%" style="text-align: center">Update</th>
+        <th scope="col" width="5%" style="text-align: center">Delete</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let vehicle of vehicles; let i = index">
+        <th  scope="row">{{i+1}}</th>
+        <td >{{vehicle.vehicleId}}</td>
+        <td>{{vehicle.model}}</td>
+        <td>{{vehicle.vehicleType}}</td>
+        <td>{{vehicle.noOfSeats}}</td>
+        <td>{{vehicle.fuelType}}</td>
+        <td style="text-align: center">
+          <i class="fas fa-search" style="cursor: pointer" (click)="setVehicle(vehicle)"></i>
+        </td>
+        <td style="text-align: center">
+          <i class="fas fa-pen" style="cursor: pointer" (click)="goToUpdate(vehicle)"></i>
+        </td>
+        <td style="text-align: center">
+          <i class="fas fa-trash" style="cursor: pointer" (click)="goToUpdate(vehicle)"></i>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+<!--    <button class="btn btn-warning" style="font-weight: bold;margin-left: 20px" (click)="download()">-->
+<!--      Report-->
+<!--    </button>-->
+
+  </div>
+</div>
+
+<div class="modalTable" [style.visibility]="isModalTable.openTable?'visible':'hidden'">
+  <div (click)="isTrueOrFalse(false)"></div>
+  <div style="">
+    <div style="max-height: calc(100vh - 100px);overflow-y: scroll">
+      <div style="min-width: 1390px;">
+        <i class="fas fa-times" style="cursor: pointer;margin-right: 10px" (click)="isTrueOrFalse(false)"></i>
+      </div>
+
+      <div id="abc" class="" >
+        <span style="font-weight: bold;margin-left: 50px" >Vehicle Details  :: </span><br><br>
+
+        <div>
+          <span style="font-weight: bold;margin-left: 50px" >Vehicle Id: </span>
+          <span style="margin-left: 10px">{{vehicle.vehicleId}}</span>
+        </div><br><br>
+        <div>
+          <span style="font-weight: bold;margin-left: 50px" >Vehicle Model : </span>
+          <span style="margin-left: 10px">{{vehicle.model}}</span>
+        </div><br><br>
+        <div>
+          <span style="font-weight: bold;margin-left: 50px" >Vehicle Type  : </span>
+          <span style="margin-left: 10px">{{vehicle.vehicleType}}</span>
+        </div><br><br>
+        <div>
+          <span style="font-weight: bold;margin-left: 50px" >Number Of Seats : </span>
+          <span style="margin-left: 10px">{{vehicle.noOfSeats}}</span>
+        </div><br><br>
+        <div>
+          <span style="font-weight: bold;margin-left: 50px" >Fuel Type  : </span>
+          <span style="margin-left: 10px">{{vehicle.fuelType}}</span>
+        </div><br><br>
+
+
+        <div>
+          <span style="font-weight: bold;margin-left: 50px" >Initial Meter : </span>
+          <span style="margin-left: 10px">{{vehicle.initialMeter}}</span>
+        </div><br><br>
+        <div>
+          <span style="font-weight: bold;margin-left: 50px" > Service Meter : </span>
+          <span style="margin-left: 10px">{{vehicle.serviceMeter}}</span>
+        </div><br><br>
+        <div>
+          <span style="font-weight: bold;margin-left: 50px" >Fuel Balance : </span>
+          <span style="margin-left: 10px">{{vehicle.fuelBalance}}</span>
+        </div><br><br>
+        <div>
+          <span style="font-weight: bold;margin-left: 50px" >Fuel Consumption : </span>
+          <span style="margin-left: 10px">{{vehicle.fuelConsumption}}</span>
+        </div><br><br>
+        <div>
+          <span style="font-weight: bold;margin-left: 50px" >Occupied    : </span>
+          <span style="margin-left: 10px">{{vehicle.occupied}}</span>
+        </div><br><br>
+        <div>
+          <span style="font-weight: bold;margin-left: 50px" >Fuel Type    : </span>
+          <span style="margin-left: 10px">{{vehicle.fuelType}}</span>
+        </div><br><br>
+      </div>
+        <button class="btn btn-warning" style="font-weight: bold;margin-left: 20px" (click)="download()">
+          Report
+        </button>
+<!--        <div>-->
+<!--          <span style="font-weight: bold">Delivery person : </span>-->
+<!--          <span style="margin-left: 10px">{{deliveryItem.deliveryPersonName}}</span>-->
+<!--        </div>-->
+<!--        <div>-->
+<!--          <span style="font-weight: bold">Delivery person's NIC : </span>-->
+<!--          <span style="margin-left: 10px">{{deliveryItem.deliveryPersonNic}}</span>-->
+<!--        </div>-->
+<!--      </div>-->
+
+    </div>
+  </div>
+</div>

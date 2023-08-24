@@ -1,0 +1,63 @@
+<div class="row">
+  <div class="col-12">
+
+  </div>
+</div>
+
+<div class="row" style="display: flex;justify-content: center">
+  <div class="col-11" style="margin-top: 20px">
+
+    <span style="font-weight: bold;margin-left: 50px">Search by vip member id : </span>
+<!--    <input type="text" placeholder="Enter VIP Member Id..." style="margin-left: 20px;width: 300px;height: 37px" [(ngModel)]="vipMemberNo">-->
+<!--    <button class="btn btn-warning" style="font-weight: bold;margin-left: 20px" (click)="getVipMemberByNumber()">-->
+<!--      Search-->
+<!--    </button>-->
+
+<!--    <button class="btn btn-warning" style="font-weight: bold;margin-left: 20px" (click)="getAllVipMembers()">-->
+<!--      All vip members-->
+<!--    </button>-->
+
+    <table id="table" class="table table-striped" style="margin-top: 40px">
+
+      <thead>
+      <tr>
+<!--        <th scope="col">#</th>-->
+        <th scope="col" width="20%">Vip Member Id</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col" width="10%">Contact Number</th>
+        <th scope="col" width="10%">Address</th>
+        <th scope="col" width="10%">Position</th>
+        <!--        <th scope="col" width="5%" style="text-align: center">View</th>-->
+<!--        <th scope="col" width="5%" style="text-align: center">Update</th>-->
+<!--        <th scope="col" width="5%" style="text-align: center">Delete</th>-->
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let vipmember of vipmembers; let i = index">
+<!--        <th scope="row">{{i+1}}</th>-->
+        <td>{{vipmember.vipMemberId}}</td>
+        <td>{{vipmember.firstName}}</td>
+        <td>{{vipmember.lastName}}</td>
+        <td>{{vipmember.contactNumber}}</td>
+        <td>{{vipmember.address}}</td>
+        <td>{{vipmember.position}}</td>
+        <!--        <td style="text-align: center">-->
+        <!--          <i class="fas fa-search" style="cursor: pointer" (click)="setVipMember(vipmember)"></i>-->
+        <!--        </td>-->
+<!--        <td style="text-align: center">-->
+<!--          <i class="fas fa-pen" style="cursor: pointer" (click)="goToUpdate(vipmember)"></i>-->
+<!--        </td>-->
+<!--        <td style="text-align: center">-->
+<!--          <i class="fas fa-trash" style="cursor: pointer" (click)="goToUpdate(vipmember)"></i>-->
+<!--        </td>-->
+      </tr>
+      </tbody>
+    </table>
+    <button class="btn btn-warning" style="font-weight: bold;margin-left: 20px" (click)="download()">
+      Report
+    </button>
+
+  </div>
+</div>
+

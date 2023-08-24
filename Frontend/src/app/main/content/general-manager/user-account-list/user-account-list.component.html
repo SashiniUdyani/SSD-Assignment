@@ -1,0 +1,126 @@
+<div class="row" style="display: flex;justify-content: center" xmlns="http://www.w3.org/1999/html">
+  <div class="col-12">
+    <span style="font-size: 25px;font-weight: bold;color: #5d5b5a">User Account List</span>
+  </div>
+
+  <div class="row" style="display: flex;justify-content: center">
+    <div class="col-11" style="margin-top: 20px">
+
+
+      <span style="font-weight: bold;margin-left: 50px">Search by EmployeeID : </span>
+      <input type="text" style="margin-left: 20px;width: 300px;height: 37px" [(ngModel)]="employeeID">
+      <button class="btn btn-warning" style="font-weight: bold;margin-left: 20px" (click)="getUserAccountByID()">
+        Search
+      </button>
+
+      <button class="btn btn-warning" style="font-weight: bold;margin-left: 20px" (click)="getUserAccounts()">
+        All User Accounts
+      </button>
+
+
+      <table class="table table-striped" style="margin-top: 40px">
+        <thead>
+        <tr>
+          <th scope="col" width="5%">#</th>
+          <th scope="col" width="10%">Employee ID</th>
+          <th scope="col" width="10%">Type</th>
+          <th scope="col" width="12%">Name</th>
+          <th scope="col" width="12%">Name With Initials</th>
+          <th scope="col" width="10%">NIC</th>
+          <th scope="col" width="10%">Contact No</th>
+          <th scope="col" width="5%" style="text-align: center">View</th>
+          <th scope="col" width="5%" style="text-align: center">Update</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let userAccount of userAccountDetails; let i = index">
+          <th scope="row">{{i + 1}}</th>
+          <td>{{userAccount.employeeID}}</td>
+          <td>{{userAccount.accountType}}</td>
+          <td>{{userAccount.name}}</td>
+          <td>{{userAccount.nameWithInitials}}</td>
+          <td>{{userAccount.nic}}</td>
+
+          <!--        <td>{{userAccount.dob}}</td>-->
+          <!--        <td>{{userAccount.address}}</td>-->
+          <td>{{userAccount.contactNo}}</td>
+          <!--        <td>{{userAccount.email}}</td>-->
+          <!--        <td>{{userAccount.registeredDate}}</td>-->
+          <!--        <td>{{userAccount.nameWithInitials}}</td>-->
+
+          <td style="text-align: center">
+            <i class="fas fa-search" style="cursor: pointer" (click)="setUserAccount(userAccount)"></i>
+          </td>
+          <td style="text-align: center">
+            <i class="fas fa-pen" style="cursor: pointer" (click)="goToUpdate(userAccount)"></i>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+
+  <div class="modalTable" [style.visibility]="isModalTable.openTable?'visible':'hidden'">
+    <div (click)="isTrueOrFalse(false)"></div>
+    <div style="">
+      <div style="max-height: calc(100vh - 100px);overflow-y: scroll">
+        <div style="">
+          <i class="fas fa-times" style="cursor: pointer;margin-right: 10px" (click)="isTrueOrFalse(false)"></i>
+        </div>
+
+        <div class="">
+          <div class="col-12">
+            <span style="font-size: 25px;font-weight: bold;color: #5d5b5a">User</span>
+          </div>
+          <br>
+          <div>
+            <span style="font-weight: bold">Employee ID : </span>
+            <span style="margin-left: 10px">{{userAccount.employeeID}}</span>
+          </div>
+          <div>
+            <span style="font-weight: bold">Type : </span>
+            <span style="margin-left: 10px">{{userAccount.accountType}}</span>
+          </div>
+          <div>
+            <span style="font-weight: bold"> NIC : </span>
+            <span style="margin-left: 10px">{{userAccount.nic}}</span>
+          </div>
+          <div>
+            <span style="font-weight: bold">Name : </span>
+            <span style="margin-left: 10px">{{userAccount.name}}</span>
+          </div>
+          <div>
+            <span style="font-weight: bold">Name With Initials: </span>
+            <span style="margin-left: 10px">{{userAccount.nameWithInitials}}</span>
+          </div>
+          <div>
+            <span style="font-weight: bold">Date of Birth : </span>
+            <span style="margin-left: 10px">{{userAccount.dob}}</span>
+          </div>
+          <div>
+            <span style="font-weight: bold">Address : </span>
+            <span style="margin-left: 10px">{{userAccount.address}}</span>
+          </div>
+          <div>
+            <span style="font-weight: bold">Contact Number : </span>
+            <span style="margin-left: 10px">{{userAccount.contactNo}}</span>
+          </div>
+          <div>
+            <span style="font-weight: bold">Email : </span>
+            <span style="margin-left: 10px">{{userAccount.email}}</span>
+          </div>
+          <div>
+            <span style="font-weight: bold">Registered Date : </span>
+            <span style="margin-left: 10px">{{userAccount.registeredDate}}</span>
+          </div>
+          <br>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+</div>

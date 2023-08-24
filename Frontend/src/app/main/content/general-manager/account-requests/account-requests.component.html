@@ -1,0 +1,84 @@
+<div class="col-12">
+  <span style="font-size: 25px;font-weight: bold;color: #5d5b5a">Account Requests</span>
+</div>
+<br>
+
+<span style="font-weight: bold;margin-left: 50px">Search by EmployeeID : </span>
+<input type="text" style="margin-left: 20px;width: 300px;height: 37px" [(ngModel)]="employeeID">
+<button class="btn btn-warning" style="font-weight: bold;margin-left: 20px" (click)="getUserAccountByID()">
+  Search
+</button>
+
+<button class="btn btn-warning" style="font-weight: bold;margin-left: 20px" (click)="getUserAccountsForApplicants()">
+  All Account Requests
+</button>
+
+<table class="table table-striped" style="margin-top: 20px">
+  <thead>
+  <tr>
+    <th scope="col" width="5%">#</th>
+    <th scope="col">Employee ID</th>
+    <th scope="col">Type</th>
+    <th scope="col">NIC</th>
+    <th scope="col">Name With Initials</th>
+    <th scope="col">Date of Birth</th>
+    <th scope="col">Address</th>
+    <th scope="col">Contact Number</th>
+    <th scope="col">Email</th>
+    <th scope="col">Registered Date</th>
+    <th scope="col">Approval</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let user of userAccountDetails; let i = index">
+    <th scope="row">{{i + 1}}</th>
+    <td>{{user.employeeID}}</td>
+    <td>{{user.accountType}}</td>
+    <td>{{user.nic}}</td>
+    <td>{{user.nameWithInitials}}</td>
+    <td>{{user.dob}}</td>
+    <td>{{user.address}}</td>
+    <td>{{user.contactNo}}</td>
+    <td>{{user.email}}</td>
+    <td>{{user.registeredDate}}</td>
+
+    <td style="text-align: center" (click)="setUserAccount(user)">
+      <i class="fas fa-pen" style="cursor: pointer"></i>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<div class="modalTable" [style.visibility]="isModalTable.openTable?'visible':'hidden'">
+  <div (click)="isTrueOrFalse(false)"></div>
+  <div style="">
+    <div style="max-height: calc(100vh - 100px);overflow-y: scroll">
+      <div style="">
+        <i class="fas fa-times" style="cursor: pointer;margin-right: 10px" (click)="isTrueOrFalse(false)"></i>
+      </div>
+
+      <div class="">
+        <div style="font-size: 25px;color: green;font-weight: bold"
+             *ngIf="selectedUserAccount!==undefined?selectedUserAccount.approved:false">
+          This user account is approved
+        </div>
+        <div style="font-size: 25px;color: red;font-weight: bold"
+             *ngIf="selectedUserAccount!==undefined?!selectedUserAccount.approved:false">
+          This user account is not approved
+        </div>
+        <div style="font-size: 20px;margin-top: 20px">
+          Do you want to approve or deny this user account?
+        </div>
+        <div style="display: flex;justify-content: center">
+          <button type="submit" class="btn btn-success" style="font-weight: bold; margin-right: 20px"
+                  (click)="approveUserAccount(true)">Approve
+          </button>
+          <button type="submit" class="btn btn-danger" style="font-weight: bold;" (click)="approveUserAccount(false)">
+            Deny
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

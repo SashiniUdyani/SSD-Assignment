@@ -1,0 +1,185 @@
+<app-alert-box *ngIf="alertBox.alert" [alertMsg]="alertBox"></app-alert-box>
+
+<div class="row">
+  <div class="col-12">
+    <span style="font-size: 25px;font-weight: bold;color: #5d5b5a">Add Special Booking</span>
+  </div>
+</div>
+
+<div class="row" style="display: flex;justify-content: center;margin-top: -50px">
+  <div class="col-11" style="margin-top: 20px">
+
+
+    <div class="row" style="display: flex;justify-content: center;margin-top: 50px">
+
+      <form #specialBookingForm="ngForm" (ngSubmit)="specialBookingForm.form.valid && onSubmit()" novalidate>
+
+        <div style="display: flex;margin-top: 50px">
+          <div style="width: 50%;padding-right: 20px">
+
+            <div class="row" style="margin-top: 10px">
+              <div class="col-5">
+                Shift ID :
+              </div>
+              <div class="col-8" style="margin-left: 250px; margin-top: -20px;">
+                <input class="form-control" type="text" readonly [value]="shift.shiftId">
+              </div>
+            </div>
+
+            <div class="row" style="margin-top: 10px">
+              <div class="col-5">
+                Shift Date :
+              </div>
+              <div class="col-8" style="margin-left: 250px; margin-top: -20px;">
+                <input class="form-control" type="text" readonly [value]="shift.shiftDate">
+              </div>
+            </div>
+
+            <div class="row" style="margin-top: 10px">
+              <div class="col-5">
+                Starting Time :
+              </div>
+              <div class="col-8" style="margin-left: 250px; margin-top: -20px;">
+                <input class="form-control" type="text" readonly [value]="shift.startingTimeActual">
+              </div>
+            </div>
+
+            <div class="row" style="margin-top: 10px">
+              <div class="col-5">
+                Ending Time :
+              </div>
+              <div class="col-8" style="margin-left: 250px; margin-top: -20px;">
+                <input class="form-control" type="text" readonly [value]="shift.endingTimeActual">
+              </div>
+            </div>
+
+
+            <div class="row" style="margin-top: 10px">
+              <div class="col-5">
+                Booking Date / Time :
+              </div>
+              <div class="col-8" style="margin-left: 250px; margin-top: -20px;">
+                <input type="datetime-local" class="form-control"
+                       [(ngModel)]="specialBooking.booking.bookingDateTime"
+                       #bookingDateTime="ngModel"
+                       min="{{getMinDate()}}"
+                       name="bookingDateTime" required>
+                <div
+                  *ngIf="(bookingDateTime.touched || specialBookingForm.submitted) && bookingDateTime.errors?.required"
+                  class="validErr">
+                  Booking Date is required
+                </div>
+              </div>
+            </div>
+
+
+            <div class="row" style="margin-top: 20px">
+              <div class="col-5">
+                Booking Status :
+              </div>
+              <div class="col-8" style="margin-left: 250px; margin-top: -20px;">
+                <label>
+                  <input name="bookingStatus" type="radio" [value]="true"
+                         [(ngModel)]="specialBooking.booking.bookingStatus">
+                  <span style="font-size: 16px"> Active</span>
+                </label>
+                <label style="margin-left: 40px">
+                  <input name="bookingStatus" type="radio" [value]="false"
+                         [(ngModel)]="specialBooking.booking.bookingStatus">
+                  <span style="font-size: 16px"> Inactive</span>
+                </label>
+              </div>
+
+            </div>
+
+
+            <div class="row" style="margin-top: 20px">
+              <div class="col-5">
+                Destination :
+              </div>
+              <div class="col-8" style="margin-left: 250px; margin-top: -20px;">
+                <input type="text" class="form-control"
+                       [(ngModel)]="specialBooking.booking.destination"
+                       #destination="ngModel"
+                       name="destination" required appTextValidator>
+                <div *ngIf="(destination.touched || specialBookingForm.submitted) && destination.errors?.required"
+                     class="validErr">
+                  Destination is required
+                </div>
+              </div>
+            </div>
+
+            <div class="row" style="margin-top: 20px">
+              <div class="col-5">
+                Description :
+              </div>
+              <div class="col-8" style="margin-left: 250px; margin-top: -20px;">
+                <input type="text" class="form-control"
+                       [(ngModel)]="specialBooking.description"
+                       #description="ngModel"
+                       name="description" required appTextValidator>
+                <div *ngIf="(description.touched || specialBookingForm.submitted) && description.errors?.required"
+                     class="validErr">
+                  Description is required
+                </div>
+              </div>
+            </div>
+
+
+            <div class="row" style="margin-top: 20px">
+              <div class="col-5">
+                Number of Passengers :
+              </div>
+              <div class="col-8" style="margin-left: 250px; margin-top: -20px;">
+                <input type="number" class="form-control" min="0"
+                       [(ngModel)]="specialBooking.noOfPassengers"
+                       (focusout)="specialBooking.noOfPassengers = setNumberPositive(specialBooking.noOfPassengers)"
+                       #noOfPassengers="ngModel"
+                       name="noOfPassengers" required>
+                <div *ngIf="(noOfPassengers.touched || specialBookingForm.submitted) && noOfPassengers.errors?.required"
+                     class="validErr">
+                  Number of Passengers is required
+                </div>
+              </div>
+            </div>
+
+
+            <div class="row" style="margin-top: 20px">
+              <div class="col-5">
+                Approved Fuel Amount:
+              </div>
+              <div class="col-8" style="margin-left: 250px; margin-top: -20px;">
+                <input type="number" class="form-control" min="0"
+                       [(ngModel)]="specialBooking.approvedFuelAmount"
+                       (focusout)="specialBooking.approvedFuelAmount = setNumberPositive(specialBooking.approvedFuelAmount)"
+                       #approvedFuelAmount="ngModel"
+                       name="approvedFuelAmount" required>
+                <div
+                  *ngIf="(approvedFuelAmount.touched || specialBookingForm.submitted) && approvedFuelAmount.errors?.required"
+                  class="validErr">
+                  Approved Fuel Amount is required
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+
+
+        <div class=""
+             style="border-top: 0px solid #dfdfdf;display: flex;margin-top: 20px;padding-top: 20px;margin-bottom: 40px">
+          <div class="col-12" style="text-align: right">
+            <button type="submit" class="btn btn-success" style="font-weight: bold;font-size: 20px">Add Special
+              Booking
+            </button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+
+  </div>
+
+
+</div>

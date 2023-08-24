@@ -1,0 +1,51 @@
+<div class="row" style="display: flex;justify-content: center">
+  <div class="col-11" style="margin-top: 20px">
+
+
+
+    <div id="pdf">
+      <div style="margin-top: 20px; margin-left: 500px; font-size: 25px">
+        Delayed Transports Report
+      </div>
+
+
+      <table class="table table-striped" style="margin-top: 20px">
+        <thead>
+        <tr>
+          <!--<th scope="col">#</th>-->
+          <!--        <th scope="col" width="8%">Week</th>-->
+          <th scope="col" width="12%">Application ID</th>
+          <!--        <th scope="col" width="10%">Passenger ID</th>-->
+          <th scope="col" width="10%">Destination</th>
+          <th scope="col" width="10%">Vehicle Type</th>
+          <th scope="col" width="15%">Number of Passengers</th>
+          <th scope="col" width="17%">Scheduled Starting Time</th>
+          <th scope="col" width="17%">Actual Outgoing Time</th>
+          <th scope="col" width="20%">Time Difference</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let transport of transportDetails;">
+          <td>{{transport.applicationID}}</td>
+          <td>{{transport.destination}}</td>
+          <td>{{transport.vehicleType}}</td>
+          <td>{{transport.passengerApplication.noOfPassengers}}</td>
+          <td>{{transport.depatureDate}}</td>
+          <td>{{transport.token.departureDate  + ' ' +transport.token.departureTime}}</td>
+          <td>{{getDataDiff(transport.depatureDateActual, transport.token.departureDate + 'T' + transport.token.departureTimeActual)}}</td>
+
+        </tr>
+
+        </tbody>
+      </table>
+
+    </div>
+    <button class="btn btn-warning" style="font-weight: bold;margin-left: 1100px"
+            (click)="sendToPdf()">
+      Download
+    </button>
+
+
+  </div>
+</div>
+

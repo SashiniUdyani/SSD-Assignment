@@ -1,0 +1,130 @@
+<div style="padding-left: 10px;padding-top: 10px;padding-right: 10px;margin-top: 0px">
+
+  <div
+    routerLink="/main/shift"
+    (click)="setTopic('Driver Shift')"
+    #shift="routerLinkActive"
+    routerLinkActive
+    [ngStyle]="{'color':shift.isActive?'#c0050e':''}">
+    Driver Shift
+  </div>
+
+  <div
+    style="border: 0px;padding: 0px"
+    routerLink="/main/update_shift"
+    #updateShift="routerLinkActive"
+    routerLinkActive>
+  </div>
+
+  <div
+    routerLink="/main/view_shifts"
+    (click)="setTopic('View Driver Shifts')"
+    #viewDriverShifts="routerLinkActive"
+    routerLinkActive
+    [ngStyle]="{'color':viewDriverShifts.isActive || updateShift.isActive?'#c0050e':''}">
+    View Driver Shifts
+  </div>
+
+
+  <div
+    style="border: 0px;padding: 0px"
+    routerLink="/main/special_booking"
+    #specialBooking="routerLinkActive"
+    routerLinkActive>
+  </div>
+  <div
+    style="border: 0px;padding: 0px"
+    routerLink="/main/update_special_booking"
+    #updateSpecialBooking="routerLinkActive"
+    routerLinkActive>
+  </div>
+
+  <div
+    routerLink="/main/view_special_booking"
+    (click)="setTopic('View Special Booking')"
+    #viewSpecialBooking="routerLinkActive"
+    routerLinkActive
+    [ngStyle]="{'color':viewSpecialBooking.isActive || updateSpecialBooking.isActive?'#c0050e':''}">
+    View Special Booking
+  </div>
+  <div
+    style="border: 0px;padding: 0px"
+    routerLink="/main/vip_booking"
+    #vipBooking="routerLinkActive"
+    routerLinkActive>
+  </div>
+
+  <div
+    style="border: 0px;padding: 0px"
+    routerLink="/main/update_vip_booking"
+    #updateVipBooking="routerLinkActive"
+    routerLinkActive>
+  </div>
+
+  <div
+    routerLink="/main/view_vip_booking"
+    (click)="setTopic('View Vip Booking')"
+    #viewVipBooking="routerLinkActive"
+    routerLinkActive
+    [ngStyle]="{'color':viewVipBooking.isActive || updateVipBooking.isActive?'#c0050e':''}">
+    View Vip Booking
+  </div>
+
+
+  <div
+    style="border: 0px;padding: 0px"
+    routerLink="/main/booking_application"
+    (click)="setTopic('Application Booking')"
+    #bookings="routerLinkActive"
+    routerLinkActive>
+  </div>
+
+  <div
+    style="border: 0px;padding: 0px"
+    routerLink="/main/update_booking_application"
+    #updateBookings="routerLinkActive"
+    routerLinkActive>
+  </div>
+
+  <div
+    routerLink="/main/view_booking_application"
+    (click)="setTopic('View Application Booking')"
+    #viewBookings="routerLinkActive"
+    routerLinkActive
+    [ngStyle]="{'color':viewBookings.isActive || updateBookings.isActive?'#c0050e':''}">
+    View Application Booking
+  </div>
+
+  <div
+    style="border: 0px;padding: 0px"
+    routerLink="/main/program_booking"
+    (click)="setTopic('Program Booking')"
+    #programBooking="routerLinkActive"
+    routerLinkActive>
+  </div>
+
+  <div
+    style="border: 0px;padding: 0px"
+    routerLink="/main/update_program_booking"
+    #updateProgramBooking="routerLinkActive"
+    routerLinkActive>
+  </div>
+
+  <div
+    routerLink="/main/view_program_booking"
+    (click)="setTopic('View Program Booking')"
+    #viewProgramBooking="routerLinkActive"
+    routerLinkActive
+    [ngStyle]="{'color':viewProgramBooking.isActive || updateProgramBooking.isActive?'#c0050e':''}">
+    View Program Booking
+  </div>
+
+  <div
+    routerLink="/main/booking_report"
+    (click)="setTopic('Booking Report')"
+    #bookingReport="routerLinkActive"
+    routerLinkActive
+    [ngStyle]="{'color':bookingReport.isActive?'#c0050e':''}">
+    Booking Report
+  </div>
+</div>

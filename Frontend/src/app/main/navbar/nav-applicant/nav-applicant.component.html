@@ -1,0 +1,66 @@
+<div style="padding-left: 10px;padding-top: 10px;padding-right: 10px;margin-top: 0px">
+
+  <div
+    routerLink="/main/available_transports"
+    (click)="setTopic('Available Transports')"
+    #availableTransports="routerLinkActive"
+    routerLinkActive
+    [ngStyle]="{'color':availableTransports.isActive?'#c0050e':''}">
+    Available Transports
+  </div>
+
+  <div
+    routerLink="/main/create_new_request"
+    (click)="setTopic('New Passenger Application')"
+    #createNewRequest="routerLinkActive"
+    routerLinkActive
+    [ngStyle]="{'color':createNewRequest.isActive?'#c0050e':''}">
+    New Passenger Application
+  </div>
+
+  <div
+    routerLink="/main/application_status"
+    (click)="setTopic('New Item Application')"
+    #itemApplication="routerLinkActive"
+    routerLinkActive
+    [ngStyle]="{'color':itemApplication.isActive?'#c0050e':''}">
+    New Item Application
+  </div>
+
+  <div
+    routerLink="/main/Item_passenger"
+    (click)="setTopic('Item Passenger Application')"
+    #itemPassenger="routerLinkActive"
+    routerLinkActive
+    [ngStyle]="{'color':itemPassenger.isActive?'#c0050e':''}">
+    Item Passenger Application
+  </div>
+
+<!--  <div-->
+<!--    routerLink="/main/notifications"-->
+<!--    (click)="setTopic('Notifications')"-->
+<!--    #notificationsapplcant="routerLinkActive"-->
+<!--    routerLinkActive-->
+<!--    [ngStyle]="{'color':notificationsapplcant.isActive?'#c0050e':''}">-->
+<!--    Notifications-->
+<!--  </div>-->
+
+  <div
+    routerLink="/main/feedback"
+    (click)="setTopic('Transport Usage Report')"
+    #feedback="routerLinkActive"
+    routerLinkActive
+    [ngStyle]="{'color':feedback.isActive?'#c0050e':''}">
+    Transport Usage Report
+  </div>
+  <div
+    routerLink="/main/waiting"
+    (click)="setTopic('Waiting Report')"
+    #waiting="routerLinkActive"
+    routerLinkActive
+    [ngStyle]="{'color':waiting.isActive?'#c0050e':''}">
+    Waiting Report
+  </div>
+  <!--<div style="color: #b56e04">Vehicle</div>-->
+  <!--<div>Driver</div>-->
+</div>

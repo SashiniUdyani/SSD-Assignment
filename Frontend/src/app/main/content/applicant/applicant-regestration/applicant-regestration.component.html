@@ -1,0 +1,205 @@
+<app-header></app-header>
+
+<div class="row" style="display: flex;justify-content: center;padding: 30px">
+  <div class="col-12">
+    <span style="font-size: 25px;font-weight: bold;color: #5d5b5a">Applicant Registration</span>
+  </div>
+
+  <form #applicantRegistrationForm="ngForm" (ngSubmit)="applicantRegistrationForm.form.valid && onSubmit()" novalidate>
+
+    <div style="display: flex;margin-top: 50px">
+      <div style="width: 50%;padding-right: 20px">
+        <div class="row">
+          <div class="col-4">
+            Employee ID :
+          </div>
+          <div class="col-8">
+            <input type="text" class="form-control"
+                   [(ngModel)]="App.userAccount.employeeID"
+                   #name="ngModel"
+                   name="name" placeholder="Eg: [ 12345 ]" required  appEmployeeIdValidator>
+            <div *ngIf="(name.touched || applicantRegistrationForm.submitted) && name.errors?.required"
+                 class="validErr" >
+              Employee ID is required
+            </div>
+            <div *ngIf="(name.dirty) && name.errors?.employeeIdInvalid"
+                 class="validErr">
+              Invalid Employee ID
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 10px">
+          <div class="col-4">
+            Employee Name :
+          </div>
+          <div class="col-8">
+            <input type="text" class="form-control"
+                   [(ngModel)]="App.userAccount.name"
+                   #employeeID="ngModel"
+                   name="employeeID" required appTextValidator>
+            <div *ngIf="(employeeID.touched || applicantRegistrationForm.submitted) && employeeID.errors?.required"
+                 class="validErr">
+              Applicant Name is required
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 10px">
+          <div class="col-4">
+            NIC :
+          </div>
+          <div class="col-8">
+            <input type="text" class="form-control"
+                   [(ngModel)]="App.userAccount.nic"
+                   #nic="ngModel"
+                   name="nic" required appNicValidator>
+            <div *ngIf="(nic.touched || applicantRegistrationForm.submitted) && nic.errors?.required"
+                 class="validErr">
+              NIC is required
+            </div>
+            <div *ngIf="(nic.dirty) && nic.errors?.nicInvalid"
+                 class="validErr">
+              Invalid NIC
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 10px">
+          <div class="col-4">
+            Date of Birth :
+          </div>
+          <div class="col-8">
+            <input type="date" class="form-control"
+                   [(ngModel)]="App.userAccount.dob"
+                   #dob="ngModel"
+
+                   max="{{getMinDate()}}"
+                   name="dob" required>
+            <div *ngIf="(dob.touched || applicantRegistrationForm.submitted) && dob.errors?.required"
+                 class="validErr">
+              Date of Birth is required
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 10px">
+          <div class="col-4">
+            Address :
+          </div>
+          <div class="col-8">
+            <input type="text" class="form-control"
+                   [(ngModel)]="App.userAccount.address"
+                   #address="ngModel"
+                   name="address" required>
+            <div *ngIf="(address.touched || applicantRegistrationForm.submitted) && address.errors?.required"
+                 class="validErr">
+              Address is required
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 10px">
+          <div class="col-4">
+            Contact Number :
+          </div>
+          <div class="col-8">
+            <input type="text" class="form-control"
+                   [(ngModel)]="App.userAccount.contactNo"
+                   #contactNo="ngModel"
+                   name="contactNo" required appTelephoneValidator>
+            <div *ngIf="(contactNo.touched || applicantRegistrationForm.submitted) && contactNo.errors?.required"
+                 class="validErr">
+              Contact Number is required
+            </div>
+            <div *ngIf="(contactNo.dirty) && contactNo.errors?.telephoneInvalid"
+                 class="validErr">
+              Invalid Contact Number
+            </div>
+
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 10px">
+          <div class="col-4">
+            Email :
+          </div>
+          <div class="col-8">
+            <input type="text" class="form-control"
+                   [(ngModel)]="App.userAccount.email"
+                   #email="ngModel"
+                   name="email" required appEmailValidator>
+            <div *ngIf="(email.touched || applicantRegistrationForm.submitted) && email.errors?.required"
+                 class="validErr">
+              Contact Number is required
+            </div>
+            <div *ngIf="(email.dirty) && email.errors?.emailInvalid"
+                 class="validErr">
+              Invalid Email
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 10px">
+          <div class="col-4">
+            Registering Date :
+          </div>
+          <div class="col-8">
+            <input type="date" class="form-control"
+                   [(ngModel)]="App.userAccount.registeredDate"
+                   #registeredDate="ngModel"
+                   max="{{getMinDate()}}"
+                   name="registeredDate" required>
+            <div *ngIf="(registeredDate.touched || applicantRegistrationForm.submitted) && registeredDate.errors?.required"
+                 class="validErr">
+              Registering Date is required
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 10px">
+          <div class="col-4">
+            Name with Initials :
+          </div>
+          <div class="col-8">
+            <input type="text" class="form-control"
+                   [(ngModel)]="App.userAccount.nameWithInitials"
+                   #nameWithInitials="ngModel"
+                   name="nameWithInitials" required appTextValidator>
+            <div *ngIf="(nameWithInitials.touched || applicantRegistrationForm.submitted) && nameWithInitials.errors?.required"
+                 class="validErr">
+              Name with Initials is required
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 10px">
+          <div class="col-4">
+            Password :
+          </div>
+            <div class="col-7" >
+              <input type="{{type}}" class="form-control" name="passengerType" required [(ngModel)]="App.userAccount.password">
+            </div>
+
+            <div class="col-1" >
+              <button *ngIf="btn==true"  style=" background-color: Transparent;background-repeat:no-repeat;border: none; cursor:pointer; padding-left: 20px"  (click)="hide()">
+                <i class="fas far fa-eye"  style="font-size: 30px"  ></i>
+              </button>
+              <button *ngIf="btn==false" style=" background-color: Transparent;background-repeat:no-repeat;border: none; cursor:pointer; padding-left: 20px" (click)="show()">
+              <i class="fas fa-eye-slash"  style="font-size: 30px"  ></i>
+              </button>
+            </div>
+          </div>
+        <div class="" style="border-top: 0px solid #dfdfdf;display: flex;margin-top: 20px;padding-top: 20px;margin-bottom: 40px">
+          <div class="col-12" style="text-align: right">
+            <button type="button" class="btn btn-success" style="font-weight: bold;font-size: 20px;margin-right: 30px; background-color:#0c95cb " (click)="demo()">Demo</button>
+            <button type="submit" class="btn btn-success" style="font-weight: bold;font-size: 20px;margin-right: 30px">Register</button>
+            <button type="button" class="btn btn-warning" style="font-weight: bold;font-size: 20px" routerLink="/login">Login</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<app-footer></app-footer>

@@ -1,0 +1,104 @@
+<div class="row" style="display: flex;justify-content: center">
+  <div class="col-12">
+    <span style="font-size: 25px;font-weight: bold;color: #5d5b5a">Update Accident Details</span>
+  </div>
+
+  <form #accidentDetailsForm="ngForm" (ngSubmit)="accidentDetailsForm.form.valid && addAccident()" novalidate>
+
+    <div style="display: flex;margin-top: 50px">
+      <div style="width: 50%;padding-right: 20px">
+        <div class="row" style="margin-top: 10px">
+          <div class="col-4">
+            Vehicle ID :
+          </div>
+          <div class="col-8">
+            <input type="text" class="form-control"
+                   [(ngModel)]="accidentDetail.vehicle.vehicleId"
+                   #vehicleID="ngModel"
+                   name="vehicleID" disabled>
+            <div *ngIf="(vehicleID.touched || accidentDetailsForm.submitted) && vehicleID.errors?.required"
+                 class="validErr">
+              Accident Date is required
+            </div>
+          </div>
+        </div>
+        <div class="row" style="margin-top: 10px">
+          <div class="col-4">
+            Accident Date :
+          </div>
+          <div class="col-8">
+            <input type="date" class="form-control"
+                   [(ngModel)]="accidentDetail.accidentDate"
+                   #accidentDate="ngModel"
+                   name="accidentDate" disabled>
+            <div *ngIf="(accidentDate.touched || accidentDetailsForm.submitted) && accidentDate.errors?.required"
+                 class="validErr">
+              Accident Date is required
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 10px">
+          <div class="col-4">
+            Accident Time :
+          </div>
+          <div class="col-8">
+            <input type="time" class="form-control"
+                   [(ngModel)]="accidentDetail.accidentTimeActual"
+                   #accidentTime="ngModel"
+                   name="accidentTime" disabled>
+            <div *ngIf="(accidentTime.touched || accidentDetailsForm.submitted) && accidentTime.errors?.required"
+                 class="validErr">
+              Accident Time is required
+            </div>
+          </div>
+        </div>
+
+
+        <div class="row" style="margin-top: 10px">
+          <div class="col-4">
+            Insurance Reference No:
+          </div>
+          <div class="col-8">
+            <input type="text" class="form-control"
+                   [(ngModel)]="accidentDetail.insuranceNo"
+                   #insuranceNo="ngModel"
+                   name="insuranceNo" required>
+            <div *ngIf="(insuranceNo.touched || accidentDetailsForm.submitted) && insuranceNo.errors?.required"
+                 class="validErr">
+              Insurance reference no is required
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 10px">
+          <div class="col-4">
+            Insurance Status :
+          </div>
+          <div class="col-8">
+            <select
+              class="form-control"
+              [(ngModel)]="accidentDetail.insuranceStatus"
+              #insuranceStatus="ngModel"
+              name="insuranceStatus" required>
+              <option value="true">Insurance Approved</option>
+              <option value="false">Insurance Not Approved</option>
+            </select>
+            <div *ngIf="(insuranceStatus.touched || accidentDetailsForm.submitted) && insuranceStatus.errors?.required"
+                 class="validErr">
+            </div>
+          </div>
+        </div>
+
+        <div class=""
+             style="border-top: 0px solid #dfdfdf;display: flex;margin-top: 20px;padding-top: 20px;margin-bottom: 40px;">
+          <div class="col-12" style="text-align: right">
+            <button type="submit" class="btn btn-success" style="font-weight: bold;font-size: 20px">Update Details
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+ </form>
+</div>

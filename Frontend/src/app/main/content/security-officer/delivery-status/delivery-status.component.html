@@ -1,0 +1,60 @@
+<div class="row">
+  <div class="col-12">
+
+  </div>
+</div>
+
+<div class="row" style="display: flex;justify-content: center">
+  <div class="col-11" style="margin-top: 20px">
+
+    <div>
+      <span style="font-weight: bold">Search by :</span>
+      <span style="margin-left: 20px">Deliveries for</span>
+      <input type="date" style="margin-left: 20px;height: 37px" [(ngModel)]="deliveryDate">
+      <button class="btn btn-warning" style="font-weight: bold;margin-left: 20px" (click)="getAllDeliveriesByDate()">
+        Search
+      </button>
+    </div>
+
+    <div style="margin-top: 20px">
+      <span style="font-weight: bold;margin-left: 0px">Search by company : </span>
+      <input type="text" style="margin-left: 20px;width: 300px;height: 37px" [(ngModel)]="companyName">
+      <button class="btn btn-warning" style="font-weight: bold;margin-left: 20px" (click)="getAllDeliveriesByCompany()">
+        Search
+      </button>
+
+      <button class="btn btn-warning" style="font-weight: bold;margin-left: 60px" (click)="getAllItemDeliveries()">
+        All Deliveries
+      </button>
+    </div>
+
+    <table class="table table-striped" style="margin-top: 40px">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Company</th>
+        <th scope="col">Address</th>
+        <th scope="col">Contact No</th>
+        <th scope="col">Delivery Date</th>
+        <th scope="col">Delivery Time</th>
+        <th scope="col" width="10%" style="text-align: center">Update</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let deliveryItem of deliveryItemDetails; let i = index">
+        <th scope="row">{{i+1}}</th>
+        <td>{{deliveryItem.companyName}}</td>
+        <td>{{deliveryItem.address}}</td>
+        <td>{{deliveryItem.contactNumber}}</td>
+        <td>{{deliveryItem.deliveryDate}}</td>
+        <td>{{deliveryItem.deliveryTime}}</td>
+        <td style="text-align: center">
+          <i class="fas fa-pen" style="cursor: pointer" (click)="goToUpdate(deliveryItem)"></i>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
+

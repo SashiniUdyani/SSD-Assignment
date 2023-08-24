@@ -1,0 +1,63 @@
+<div class="row">
+  <div class="col-12">
+
+  </div>
+</div>
+
+<div class="row" style="display: flex;justify-content: center">
+  <div class="col-11" style="margin-top: 20px">
+
+    <div style="margin-top: 20px">
+      <span style="font-weight: bold;margin-left: 0px">Search by Special Booking ID : </span>
+      <input type="text" style="margin-left: 112px;width: 300px;height: 37px" [(ngModel)]="specialBookingId">
+      <button class="btn btn-warning" style="font-weight: bold;margin-left: 20px"
+              (click)="getSpecialBookingBySpecialBookingId()">
+        Search
+      </button>
+      <button class="btn btn-warning" style="font-weight: bold;margin-left: 10px" (click)="getAllSpecialBooking()">
+        All Special Bookings
+      </button>
+    </div>
+    <div style="margin-top: 20px">
+
+    </div>
+
+    <table class="table table-striped" style="margin-top: 40px">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Booking ID</th>
+        <th scope="col" width="10%">Driver ID</th>
+        <th scope="col" width="10%">Vehicle ID</th>
+        <th scope="col" width="10%">Booking Date</th>
+        <th scope="col" width="10%">Booking Time</th>
+        <th scope="col" width="10%">Booking Status</th>
+        <th scope="col">Destination</th>
+        <th scope="col" width="10%">Description</th>
+        <th scope="col" width="10%">Number of Passengers</th>
+        <th scope="col" width="10%">Approved fuel Amount</th>
+        <th scope="col" width="2%" style="text-align: center">Update</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let specialBooking of specialBooking; let i = index">
+        <th scope="row">{{i + 1}}</th>
+        <td>{{specialBooking.booking.bookingId}}</td>
+        <td>{{specialBooking.driver.driverID}}</td>
+        <td>{{specialBooking.vehicle.vehicleId}}</td>
+        <td>{{specialBooking.booking.bookingDate}}</td>
+        <td>{{specialBooking.booking.bookingTime}}</td>
+        <td>{{specialBooking.booking.bookingStatus}}</td>
+        <td>{{specialBooking.booking.destination}}</td>
+        <td>{{specialBooking.description}}</td>
+        <td>{{specialBooking.noOfPassengers}}</td>
+        <td>{{specialBooking.approvedFuelAmount}}</td>
+        <td style="text-align: center">
+          <i class="fas fa-pen" style="cursor: pointer" (click)="goToUpdate(specialBooking)"></i>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>

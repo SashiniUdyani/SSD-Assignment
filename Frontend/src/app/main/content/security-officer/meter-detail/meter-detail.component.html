@@ -1,0 +1,64 @@
+<app-alert-box *ngIf="alertBox.alert" [alertMsg]="alertBox"></app-alert-box>
+<div class="row" style="display: flex;justify-content: center">
+  <div class="col-12">
+    <br>
+    <span style="font-size: 25px;font-weight: bold;color: #5d5b5a">Meter Details for Token {{token.tokenID}}</span>
+  </div>
+
+  <form #meterForm="ngForm" (ngSubmit)="meterForm.form.valid && addMeterDetail()" novalidate>
+
+    <div style="display: flex;margin-top: 50px; margin-left: 300px">
+      <div style="width: 50%;padding-right: 20px">
+        <div class="row">
+          <div class="col-4" style="font-size: medium">
+            Out Meter :
+          </div>
+          <div class="col-8">
+            <input class="form-control" type="number"
+                   [(ngModel)]="meterDetail.outMeter"
+                   #outMeter="ngModel"
+                   (focusout)="meterDetail.outMeter = setNumberPositive(meterDetail.outMeter)"
+                   name="outMeter" required min="1">
+            <div *ngIf="(outMeter.touched || meterForm.submitted) && outMeter.errors?.required"
+                 class="validErr">
+              Out Meter is required
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 10px">
+          <div class="col-4" style="font-size: medium">
+            In Meter :
+          </div>
+          <div class="col-8">
+            <input type="number" class="form-control"
+                   [(ngModel)]="meterDetail.inMeter"
+                   #inMeter="ngModel"
+                   name="inMeter" disabled>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 10px">
+          <div class="col-4" style="font-size: medium">
+            Mileage :
+          </div>
+          <div class="col-8">
+            <input type="number" class="form-control"
+                   [(ngModel)]="meterDetail.mileage"
+                   #mileage="ngModel"
+                   name="mileage" disabled>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class=""
+         style="border-top: 0px solid #dfdfdf;display: flex;margin-top: 20px;padding-top: 20px;margin-bottom: 40px">
+      <div class="col-12" style="text-align: center">
+        <button type="submit" class="btn btn-success" style="font-weight: bold;font-size: 20px">Add Meter Details</button>
+      </div>
+    </div>
+
+  </form>
+</div>

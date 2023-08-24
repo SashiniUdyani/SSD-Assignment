@@ -1,0 +1,245 @@
+<app-alert-box *ngIf="alertBox.alert" [alertMsg]="alertBox"></app-alert-box>
+
+<div class="row">
+  <div class="col-12">
+    <span style="font-size: 25px;font-weight: bold;color: #5d5b5a">Add Driver Shift</span>
+  </div>
+</div>
+
+<div class="row" style="display: flex;justify-content: center;margin-top: 0px">
+  <div class="col-11" style="margin-top: 20px">
+
+    <div style="margin-top: 20px">
+      <span style="font-weight: bold;margin-left: 0px">Search by driver : </span>
+      <input type="text" style="margin-left: 20px;width: 300px;height: 37px" [(ngModel)]="driverId">
+      <button class="btn btn-warning" style="font-weight: bold;margin-left: 20px" (click)="getDriveVehicles()">
+        Search
+      </button>
+      <button type="button" style="padding-left: 20px" (click)="getAllDriverVehicles()"
+              style="font-weight: bold;background-color: Transparent;border: none; margin-right: 20px"><i
+        class="fas fa-sync"></i>
+      </button>
+    </div>
+
+    <table class="table table-striped" style="margin-top: 40px">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Driver ID</th>
+        <th scope="col">Driver Name</th>
+        <th scope="col" style="text-align: center">Vehicle No</th>
+        <th scope="col" style="text-align: center">Vehicle</th>
+        <th scope="col" style="text-align: center">Select</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let driverVehicle of driverVehicles; let i = index">
+        <th scope="row">{{i + 1}}</th>
+        <td>{{driverVehicle.driverVehicleID.driverID}}</td>
+        <td>{{driverVehicle.driver.userAccount.nameWithInitials}}</td>
+        <td style="text-align: center">{{driverVehicle.driverVehicleID.vehicleId}}</td>
+        <td style="text-align: center">{{driverVehicle.vehicle.vehicleType}}</td>
+        <td style="text-align: center">
+          <i class="fas fa-pen" style="cursor: pointer" (click)="selectDriver(driverVehicle)"></i>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+
+    <div class="row" style="margin-top: 70px">
+      <div class="col-12">
+        <span style="font-size: 20px;font-weight: bold;color: #5d5b5a">Overtime Requests</span>
+      </div>
+    </div>
+    <div style="margin-top: 30px">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">OverTime ID</th>
+          <th scope="col">Driver ID</th>
+          <th scope="col">OT Date</th>
+          <th scope="col">No.of shifts</th>
+          <th scope="col">Starting Time</th>
+          <th scope="col">Ending Time</th>
+          <th scope="col" width="10%" style="text-align: center">Approval</th>
+          <th scope="col" width="10%" style="text-align: center">Select</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let ot of otDetails; let i = index">
+          <th scope="row">{{i + 1}}</th>
+          <td>{{ot.overTimeID}}</td>
+          <td>{{ot.driver.driverID}}</td>
+          <td>{{ot.otDate}}</td>
+          <td>{{ot.noOfShifts}}</td>
+          <td>{{ot.startTime}}</td>
+          <td>{{ot.endTime}}</td>
+
+          <td style="text-align: center" (click)="setOt(ot)">
+            <i class="fas fa-pen" style="cursor: pointer"></i>
+          </td>
+          <td style="text-align: center">
+            <i class="fas fa-pen" style="cursor: pointer" (click)="selectOt(ot)"></i>
+          </td>
+
+
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="modalTable" [style.visibility]="isModalTable.openTable?'visible':'hidden'">
+      <div (click)="isTrueOrFalse(false)"></div>
+      <div style="">
+        <div style="max-height: calc(100vh - 100px);overflow-y: scroll">
+          <div style="">
+            <i class="fas fa-times" style="cursor: pointer;margin-right: 10px" (click)="isTrueOrFalse(false)"></i>
+          </div>
+
+
+          <div class="">
+            <div style="font-size: 25px;color: green;font-weight: bold"
+                 *ngIf="selectedOt!==undefined?selectedOt.approval:false">
+              This Overtime request is approved
+            </div>
+            <div style="font-size: 25px;color: red;font-weight: bold"
+                 *ngIf="selectedOt!==undefined?!selectedOt.approval:false">
+              This Overtime request is not approved
+            </div>
+            <div style="font-size: 20px;margin-top: 20px">
+              Do you want to approve or deny this overtime?
+            </div>
+            <div style="display: flex;justify-content: center">
+              <button type="submit" class="btn btn-success" style="font-weight: bold; margin-right: 20px"
+                      (click)="approveOt(true)">Approve
+              </button>
+              <button type="submit" class="btn btn-danger" style="font-weight: bold;" (click)="approveOt(false)">
+                Deny
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<div class="row" style="display: flex;justify-content: center;margin-top: 50px">
+
+  <form #shiftForm="ngForm" (ngSubmit)="shiftForm.form.valid && onSubmit()" novalidate>
+
+    <div style="display: flex;margin-top: 50px">
+      <div style="width: 50%;padding-right: 20px">
+        <div class="row">
+          <div class="col-4">
+            Driver ID :
+          </div>
+          <div class="col-8">
+            <input type="text" class="form-control"
+                   [(ngModel)]="shift.driverVehicle.driverVehicleID.driverID"
+                   #driverID="ngModel"
+                   name="driverID" required readonly>
+            <div *ngIf="(driverID.touched || shiftForm.submitted) && driverID.errors?.required"
+                 class="validErr">
+              Driver ID is required
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 10px">
+          <div class="col-4">
+            Vehicle Number :
+          </div>
+          <div class="col-8">
+            <input type="text" class="form-control"
+                   [(ngModel)]="shift.driverVehicle.driverVehicleID.vehicleId"
+                   #vehicleId="ngModel"
+                   name="vehicleId" required readonly>
+            <div *ngIf="(vehicleId.touched || shiftForm.submitted) && vehicleId.errors?.required"
+                 class="validErr">
+              Vehicle Number is required
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 10px">
+          <div class="col-4">
+            Overtime ID :
+          </div>
+          <div class="col-8">
+            <input type="text" class="form-control"
+                   [(ngModel)]="shift.overTime.overTimeID"
+                   #overTimeIds="ngModel"
+                   name="overTimeID" readonly>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 10px">
+          <div class="col-4">
+            Shift Date :
+          </div>
+          <div class="col-8">
+            <input type="date" class="form-control"
+                   [(ngModel)]="shift.shiftDate"
+                   #shiftDate="ngModel"
+                   min="{{getMinDate()}}"
+                   name="shiftDate" required>
+            <div *ngIf="(shiftDate.touched || shiftForm.submitted) && shiftDate.errors?.required"
+                 class="validErr">
+              Shift Date is required
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 10px">
+          <div class="col-4">
+            Starting Time :
+          </div>
+          <div class="col-8">
+            <input type="time" class="form-control"
+                   [(ngModel)]="shift.startingTime"
+                   #startingTime="ngModel"
+                   name="startingTime" required>
+            <div *ngIf="(startingTime.touched || shiftForm.submitted) && startingTime.errors?.required"
+                 class="validErr">
+              Starting Time is required
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 10px">
+          <div class="col-4">
+            Ending Time :
+          </div>
+          <div class="col-8">
+            <input type="time" class="form-control"
+                   [(ngModel)]="shift.endingTime"
+                   #endingTime="ngModel"
+                   name="endingTime" required>
+            <div *ngIf="(endingTime.touched || shiftForm.submitted) && endingTime.errors?.required"
+                 class="validErr">
+              Ending Time is required
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class=""
+         style="border-top: 0px solid #dfdfdf;display: flex;margin-top: 20px;padding-top: 20px;margin-bottom: 40px">
+      <div class="col-12" style="text-align: right">
+        <button type="submit" class="btn btn-success" style="font-weight: bold;font-size: 20px">Add Driver Shift
+        </button>
+      </div>
+    </div>
+
+  </form>
+</div>
+

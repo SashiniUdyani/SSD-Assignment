@@ -1,0 +1,55 @@
+<app-alert-box *ngIf="alertBox.alert" [alertMsg]="alertBox"></app-alert-box>
+<div class="row">
+  <div class="col-12">
+
+  </div>
+</div>
+
+<div class="row" style="display: flex;justify-content: center">
+  <div class="col-11" style="margin-top: 20px">
+
+    <span style="font-weight: bold;margin-left: 50px">Search by vehicle number : </span>
+    <input type="search" placeholder="Enter Vehicle Number..."
+           style="margin-left: 20px;width: 300px;height: 37px" [(ngModel)]="vehicleNumber">
+    <button (click)="getVehicleByNumber()" class="btn btn-warning" style="font-weight: bold;margin-left: 20px">
+      Search
+    </button>
+
+    <button class="btn btn-warning" style="font-weight: bold;margin-left: 20px" (click)="getAllVehicles()">
+      All vehicles
+    </button>
+
+    <table class="table table-striped" style="margin-top: 40px">
+      <thead style="text-align: center">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Vehicle Number</th>
+        <th scope="col">Vehicle Status</th>
+        <th scope="col" style="text-align: center;">Update</th>
+      </tr>
+      </thead>
+      <tbody style="text-align: center">
+      <tr *ngFor="let vehicle of vehicles; let i = index">
+        <th scope="row">{{i + 1}}</th>
+        <td>{{vehicle.vehicleId}}</td>
+        <td *ngIf="vehicle.occupied===false" style="color: maroon">
+          Vehicle is not available
+          <i class="fas fa-times fa-lg"></i>
+        </td>
+        <td *ngIf="vehicle.occupied===true" style="color: green">
+          Vehicle is available
+          <i class="fas fa-check fa-lg"></i>
+        </td>
+        <td style="text-align: center">
+          <button class="btn btn-primary" style="cursor: pointer; height:30px; font-size:small"
+                  (click)="updateVehicleStatus(vehicle)">
+            Update Vehicle Availability
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
+

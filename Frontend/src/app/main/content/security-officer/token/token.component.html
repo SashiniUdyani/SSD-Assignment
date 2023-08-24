@@ -1,0 +1,75 @@
+<app-alert-box *ngIf="alertBox.alert" [alertMsg]="alertBox"></app-alert-box>
+<div class="row" style="display: flex;justify-content: center">
+  <div class="col-12">
+    <span style="font-size: 25px;font-weight: bold;color: #5d5b5a">Create Token</span>
+  </div>
+
+  <form #tokenForm="ngForm" (ngSubmit)="tokenForm.form.valid && onSubmit()" novalidate>
+
+    <div style="display: flex;margin-top: 50px">
+      <div style="width: 60%;padding-right: 20px; margin-left: 220px">
+        <div class="row">
+          <div class="col-4">
+            Departure Date :
+          </div>
+          <div class="col-8">
+            <input class="form-control" type="date"
+                   [(ngModel)]="setDepartureDate"
+                   #departureDate="ngModel"
+                   name="departureDate" disabled>
+<!--            <div *ngIf="(departureDate.touched || tokenForm.submitted) && departureDate.errors?.required"-->
+<!--                 class="validErr">-->
+<!--              Departure Date is required-->
+<!--            </div>-->
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 10px">
+          <div class="col-4">
+            Departure Time :
+          </div>
+          <div class="col-8">
+            <input type="time" class="form-control"
+                   [(ngModel)]="tokenDetail.departureTime"
+                   #departureTime="ngModel"
+                   name="departureTime" required>
+            <div *ngIf="(departureTime.touched || tokenForm.submitted) && departureTime.errors?.required"
+                 class="validErr">
+              Departure Time is required
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 10px">
+          <div class="col-4">
+            Transport Status :
+          </div>
+          <div class="col-8">
+            <select
+              class="form-control"
+              [(ngModel)]="tokenDetail.transportStatus"
+              #transportStatus="ngModel"
+              name="TransportStatus" required>
+              <option value="false">Not Completed</option>
+            </select>
+            <div *ngIf="(transportStatus.touched || tokenForm.submitted) && transportStatus.errors?.required"
+                 class="validErr">
+              Transport Status is required
+            </div>
+          </div>
+        </div>
+        <div class="row"
+             style="border-top: 0px solid #dfdfdf;display: flex;margin-top: 20px;padding-top: 20px;margin-bottom: 40px">
+          <div class="col-12" style="text-align: center">
+            <button type="submit" class="btn btn-success" style="font-weight: bold">Add Token
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+
+
+

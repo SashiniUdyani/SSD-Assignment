@@ -1,0 +1,132 @@
+<app-alert-box *ngIf="alertBox.alert" [alertMsg]="alertBox"></app-alert-box>
+
+<div class="row">
+  <div class="col-12">
+    <span style="font-size: 25px;font-weight: bold;color: #5d5b5a">Update Program Booking</span>
+  </div>
+</div>
+
+<div class="row" style="display: flex;justify-content: center;margin-top: 0px">
+  <div class="col-11" style="margin-top: 20px">
+
+
+    <div class="row" style="display: flex;justify-content: center;margin-top: 50px">
+
+      <form #programBookingForm="ngForm" (ngSubmit)="programBookingForm.form.valid && onSubmit()" novalidate>
+
+        <div style="display: flex;margin-top: 50px">
+          <div style="width: 50%;padding-right: 20px">
+
+
+            <div class="row" style="margin-top: 10px">
+              <div class="col-4">
+                Booking ID :
+              </div>
+              <div class="col-8">
+                <input type="text" class="form-control"
+                       [(ngModel)]="programBooking.booking.bookingId"
+                       #bookingId="ngModel"
+                       name="bookingId" readonly>
+                <div *ngIf="(bookingId.touched || programBookingForm.submitted) && bookingId.errors?.required"
+                     class="validErr">
+                </div>
+              </div>
+            </div>
+
+
+            <div class="row" style="margin-top: 10px">
+              <div class="col-4">
+                Booking Date :
+              </div>
+              <div class="col-8">
+                <input type="date" class="form-control"
+                       [(ngModel)]="programBooking.booking.bookingDate"
+                       #bookingDate="ngModel"
+                       min="{{getMinDate()}}"
+                       name="bookingDate" required>
+                <div *ngIf="(bookingDate.touched ||programBookingForm.submitted) && bookingDate.errors?.required"
+                     class="validErr">
+                  Booking Date is required
+                </div>
+              </div>
+            </div>
+
+
+            <div class="row" style="margin-top: 10px">
+              <div class="col-4">
+                Booking Time :
+              </div>
+              <div class="col-8">
+                <input type="time" class="form-control"
+                       [(ngModel)]="programBooking.booking.bookingTimeActual"
+                       #bookingTime="ngModel"
+                       name="bookingTime" required>
+                <div *ngIf="(bookingTime.touched || programBookingForm.submitted) && bookingTime.errors?.required"
+                     class="validErr">
+                  Booking Time is required
+                </div>
+              </div>
+            </div>
+
+
+            <div class="row" style="margin-top: 10px">
+              <div class="col-4">
+                Booking Status :
+              </div>
+              <div class="col-8">
+                <label>
+                  <input name="bookingStatus" type="radio" [value]="true"
+                         [(ngModel)]="programBooking.booking.bookingStatus">
+                  <span style="font-size: 18px"> Active</span>
+                </label>
+                <label style="margin-left: 40px">
+                  <input name="bookingStatus" type="radio" [value]="false"
+                         [(ngModel)]="programBooking.booking.bookingStatus">
+                  <span style="font-size: 18px"> Inactive</span>
+                </label>
+              </div>
+
+            </div>
+
+
+            <div class="row" style="margin-top: 10px">
+              <div class="col-4">
+                Destination :
+              </div>
+              <div class="col-8">
+                <input type="text" class="form-control"
+                       [(ngModel)]="programBooking.booking.destination"
+                       #destination="ngModel"
+                       name="destination" required appTextValidator>
+                <div *ngIf="(destination.touched || programBookingForm.submitted) && destination.errors?.required"
+                     class="validErr">
+                  Destination is required
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+
+
+        <div class=""
+             style="border-top: 0px solid #dfdfdf;display: flex;margin-top: 20px;padding-top: 20px;margin-bottom: 40px ;justify-content: flex-end">
+          <div class="" style="text-align: right">
+            <button type="submit" class="btn btn-success" style="font-weight: bold;font-size: 20px">Update Booking
+            </button>
+          </div>
+          <div class="" style="text-align: right;margin-left: 20px">
+            <button (click)="removeProgramBooking()" type="button" class="btn btn-danger"
+                    style="font-weight: bold;font-size: 20px">Delete Booking
+            </button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+
+  </div>
+
+
+</div>

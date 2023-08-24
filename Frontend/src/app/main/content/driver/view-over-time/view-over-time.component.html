@@ -1,0 +1,95 @@
+<app-alert-box *ngIf="alertBox.alert" [alertMsg]="alertBox"></app-alert-box>
+
+<div class="row">
+  <div class="col-12">
+
+  </div>
+</div>
+
+<div class="row" style="display: flex;justify-content: center">
+  <div class="col-11" style="margin-top: 20px">
+    <label><h1><b>OT Details</b></h1></label>
+
+
+    <table class="table table-striped" style="margin-top: 40px" >
+      <tbody *ngIf="ot">
+      <tr>
+        <td>Overtime ID</td>
+        <td>{{ot.overTimeID}}</td>
+      </tr>
+      <tr>
+        <td>Date</td>
+        <td>{{ot.otDate}}</td>
+      </tr>
+      <tr>
+        <td>Start Time</td>
+        <td>{{ot.startTime}}</td>
+      </tr>
+      <tr>
+        <td>End Time</td>
+        <td>{{ot.endTime}}</td>
+      </tr>
+      <tr>
+        <td>No of Shifts</td>
+        <td>{{ot.noOfShifts}}</td>
+      </tr>
+      <tr>
+        <td>Approval</td>
+        <td>{{ot.approval}}</td>
+      </tr>
+      <tr>
+        <td><button class="btn btn-success" style="font-weight: bold;font-size: 20px" [disabled]="disableBtn()" (click)="goToUpdate(ot)">Update OT</button> </td>
+        <td><button class="btn btn-success" style="font-weight: bold;font-size: 20px" [disabled]="disableBtn()" (click)="deleteOT()">Delete OT</button> </td>
+
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
+
+<hr style="height: 5px">
+<div class="row">
+  <div class="col-12">
+
+  </div>
+</div>
+
+<div class="row" style="display: flex;justify-content: center">
+  <div class="col-11" style="margin-top: 10px">
+    <label><h1><b>OT List</b></h1></label>
+
+
+    <table class="table table-striped" style="margin-top: 10px">
+      <thead>
+      <tr>
+        <th scope="col" width="10%">#</th>
+        <th scope="col" width="10%">Date</th>
+        <th scope="col" width="10%">Start Time</th>
+        <th scope="col" width="10%">End Time</th>
+        <th scope="col" width="10%">No of Shifts</th>
+        <th scope="col" width="10%">Approval</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let ots of otDetails; let i = index">
+        <th scope="row">{{i+1}}</th>
+        <td>{{ots.otDate}}</td>
+        <td>{{ots.startTime}}</td>
+        <td>{{ots.endTime}}</td>
+        <td>{{ots.noOfShifts}}</td>
+        <td>{{ots.approval}}</td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
+
+
+
+
+
+
+
+

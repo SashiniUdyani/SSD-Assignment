@@ -1,0 +1,169 @@
+<app-alert-box *ngIf="alertBox.alert" [alertMsg]="alertBox"></app-alert-box>
+
+<div class="row" style="display: flex;justify-content: center" xmlns="http://www.w3.org/1999/html">
+  <div class="col-12">
+    <span style="font-size: 25px;font-weight: bold;color: #5d5b5a">TV Program</span>
+    <button type="button" class="btn btn-outline-dark" style="font-weight: bold;margin-left: 20px"
+            (click)="demoForm()">Demo Form
+    </button>
+  </div>
+
+  <form #tvProgramForm="ngForm" (ngSubmit)="tvProgramForm.form.valid && onSubmit()" novalidate>
+
+    <div style="display: flex;margin-top: 50px">
+      <div style="width: 50%;padding-right: 20px">
+
+        <div class="row" style="margin-top: 10px">
+          <div class="col-4">
+            Program Name :
+          </div>
+          <div class="col-8">
+            <input type="text" class="form-control"
+                   [(ngModel)]="tvProgram.programName"
+                   #programName="ngModel"
+                   name="programName" required>
+            <div *ngIf="(programName.touched || tvProgramForm.submitted) && programName.errors?.required"
+                 class="validErr">
+              Program Name is required
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 10px">
+          <div class="col-4">
+            Starting Date:
+          </div>
+          <div class="col-8">
+            <input type="date" class="form-control"
+                   [(ngModel)]="tvProgram.startingDate"
+                   #startingDate="ngModel"
+                   name="startingDate" required>
+            <div *ngIf="(startingDate.touched || tvProgramForm.submitted) && startingDate.errors?.required"
+                 class="validErr">
+              Starting Date is required
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 10px">
+          <div class="col-4">
+            Ending Date :
+          </div>
+          <div class="col-8">
+            <input type="date" class="form-control"
+                   [(ngModel)]="tvProgram.endingDate"
+                   #endingDate="ngModel"
+                   name="endingDate" required>
+            <div *ngIf="(endingDate.touched || tvProgramForm.submitted) && endingDate.errors?.required"
+                 class="validErr">
+              Ending Date is required
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 10px">
+          <div class="col-4">
+            Transport Cost :
+          </div>
+          <div class="col-8">
+            <input type="number" class="form-control"
+                   min="0"
+                   [(ngModel)]="tvProgram.transportCost"
+                   (focusout)="tvProgram.transportCost = setNumberPositive(tvProgram.transportCost)"
+                   #transportCost="ngModel"
+                   name="transportCost" required>
+            <div *ngIf="(transportCost.touched || tvProgramForm.submitted) && transportCost.errors?.required"
+                 class="validErr">
+              Transport Cost is required
+            </div>
+          </div>
+        </div>
+
+
+        <div class="row" style="margin-top: 10px">
+          <div class="col-4">
+            Producer Name :
+          </div>
+          <div class="col-8">
+            <input type="text" class="form-control"
+                   [(ngModel)]="tvProgram.producer"
+                   #producer="ngModel"
+                   name="producer" required appTextValidator="">
+            <div *ngIf="(producer.touched || tvProgramForm.submitted) && producer.errors?.required"
+                 class="validErr">
+              Producer Name is required
+            </div>
+          </div>
+        </div>
+
+
+        <br>
+
+        <div class=""
+             style="border-top: 0px solid #dfdfdf;display: flex;margin-top: 20px;padding-top: 20px;margin-bottom: 40px">
+          <div class="col-12" style="text-align: right">
+            <button type="submit" class="btn btn-success"
+                    style="font-weight: bold;font-size: 20px; margin-right: 20px">{{btnText}}
+              TV Program
+            </button>
+            <button type="button" class="btn btn-success" (click)="setNewProgram()"
+                    style="font-weight: bold; font-size: 20px">
+              New TV Program
+            </button>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+
+    <div style="border-top: 1px solid #dfcda0;display: flex;margin-top: 20px;padding-top: 20px">
+
+      <div style="width: 100%">
+
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th scope="col" width="5%">#</th>
+            <!--            <th scope="col" width="10%">Program ID</th>-->
+            <th scope="col" width="10%">Program Name</th>
+            <th scope="col" width="10%">Starting Date</th>
+            <th scope="col" width="10%">Ending Date</th>
+            <th scope="col" width="10%">Transport Cost</th>
+            <th scope="col" width="10%">Producer Name</th>
+            <th scope="col" width="5%" style="text-align: center">Update</th>
+            <th scope="col" width="5%" style="text-align: center">Remove</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let tvProgram of tvPrograms; let i = index">
+            <th scope="row">{{i + 1}}</th>
+            <!--            <td>{{tvProgram.programID}}</td>-->
+            <td>{{tvProgram.programName}}</td>
+            <td>{{tvProgram.startingDate}}</td>
+            <td>{{tvProgram.endingDate}}</td>
+            <td>{{tvProgram.transportCost}}</td>
+            <td>{{tvProgram.producer}}</td>
+            <td style="text-align: center">
+              <i class="fas fa-pen" style="font-size: 16px" (click)="setProgram(tvProgram, i)"></i>
+            </td>
+            <td style="text-align: center" (click)="removeProgram(tvProgram,i)">
+              <i class="fas fa-times" style="color: red;font-size: 20px"></i>
+
+          </tr>
+          </tbody>
+        </table>
+
+        <br>
+        <br>
+
+
+      </div>
+    </div>
+
+  </form>
+
+</div>
+
+

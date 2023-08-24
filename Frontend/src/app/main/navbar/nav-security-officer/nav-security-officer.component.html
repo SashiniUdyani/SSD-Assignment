@@ -1,0 +1,76 @@
+<div style="padding-left: 10px;padding-top: 10px;padding-right: 10px;margin-top: 0px">
+
+  <div
+    routerLink="/main/view_approved_trip_details"
+    (click)="setTopic('View Approved Trip Details')"
+    #viewApprovedTripDetails="routerLinkActive"
+    routerLinkActive
+    [ngStyle]="{'color':viewApprovedTripDetails.isActive?'#c0050e':''}">
+    View Approved Trip Details
+  </div>
+
+  <div
+    style="border: 0px;padding: 0px"
+    routerLink="/main/create_token"
+    #createToken="routerLinkActive"
+    routerLinkActive>
+  </div>
+
+  <div
+    routerLink="/main/arrival_departure_page"
+    (click)="setTopic('Daily Arrivals and Departures Page')"
+    #arrivalDeparturePage="routerLinkActive"
+    routerLinkActive
+    [ngStyle]="{'color':arrivalDeparturePage.isActive?'#c0050e':''}">
+    Daily Arrivals & Departures
+  </div>
+
+  <div
+    routerLink="/main/completed_trips"
+    (click)="setTopic('Completed Trips')"
+    #completedTrips="routerLinkActive"
+    routerLinkActive
+    [ngStyle]="{'color':completedTrips.isActive?'#c0050e':''}">
+    View Completed Trips
+  </div>
+
+  <div
+    routerLink="/main/update_vehicle_pool"
+    (click)="setTopic('Vehicle Pool')"
+    #updateVehiclePool="routerLinkActive"
+    routerLinkActive
+    [ngStyle]="{'color':updateVehiclePool.isActive?'#c0050e':''}">
+    Vehicle Pool
+  </div>
+
+  <div
+    routerLink="/main/view_delivery_status"
+    (click)="setTopic('Delivery Status')"
+    #viewDeliveryStatus="routerLinkActive"
+    routerLinkActive
+    [ngStyle]="{'color':viewDeliveryStatus.isActive?'#c0050e':''}">
+    Delivery Status
+  </div>
+
+  <div
+    style="border: 0px;padding: 0px"
+    routerLink="/main/add_meter_detail"
+    #addMeterDetail="routerLinkActive"
+    routerLinkActive>
+  </div>
+
+  <div
+    style="border: 0px;padding: 0px"
+    routerLink="/main/update_details"
+    #updateDetail="routerLinkActive"
+    routerLinkActive>
+  </div>
+
+  <div
+    style="border: 0px;padding: 0px"
+    routerLink="/main/update_delivery_status"
+    #updateDeliveryStatus="routerLinkActive"
+    routerLinkActive>
+  </div>
+
+</div>

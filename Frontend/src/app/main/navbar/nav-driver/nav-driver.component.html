@@ -1,0 +1,67 @@
+<div style="padding-left: 10px;padding-top: 10px;padding-right: 10px;margin-top: 0px">
+
+  <div
+    routerLink="/main/driver_account"
+    (click)="setTopic('My Account')"
+    #driverAccount="routerLinkActive"
+    routerLinkActive
+    [ngStyle]="{'color':driverAccount.isActive?'#c0050e':''}">
+    My Account
+  </div>
+
+  <div
+    routerLink="/main/fuel_update"
+    (click)="setTopic('Update Fuel Balance')"
+    #fuelUpdate="routerLinkActive"
+    routerLinkActive
+    [ngStyle]="{'color':fuelUpdate.isActive?'#c0050e':''}">
+    Update Fuel Balance
+  </div>
+
+  <div
+    routerLink="/main/over_time"
+    (click)="setTopic('Add OT')"
+    #overTimeRequest="routerLinkActive"
+    routerLinkActive
+    [ngStyle]="{'color':overTimeRequest.isActive?'#c0050e':''}">
+    Add OT
+  </div>
+
+  <div
+    routerLink="/main/view_over_time"
+    (click)="setTopic('View OT')"
+    #otView="routerLinkActive"
+    routerLinkActive
+    [ngStyle]="{'color':otView.isActive?'#c0050e':''}">
+    View OT
+  </div>
+
+  <div
+    routerLink="/main/shift_details"
+    (click)="setTopic('Shift Details')"
+    #shiftDetails="routerLinkActive"
+    routerLinkActive
+    [ngStyle]="{'color':shiftDetails.isActive?'#c0050e':''}">
+    Shift Details
+  </div>
+
+  <div
+    routerLink="/main/shift_report"
+    (click)="setTopic('Attendance Report')"
+    #shiftReport="routerLinkActive"
+    routerLinkActive
+    [ngStyle]="{'color':shiftReport.isActive?'#c0050e':''}">
+    Attendance Report
+  </div>
+
+  <div
+    routerLink="/main/ot_report"
+    (click)="setTopic('OT Report')"
+    #otReport="routerLinkActive"
+    routerLinkActive
+    [ngStyle]="{'color':otReport.isActive?'#c0050e':''}">
+    OT Report
+  </div>
+
+</div>
+

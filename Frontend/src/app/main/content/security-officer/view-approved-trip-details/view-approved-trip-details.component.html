@@ -1,0 +1,48 @@
+<div class="row">
+  <div class="col-12">
+    <span style="font-size: 25px;font-weight: bold;color: #5d5b5a">Booking Details</span>
+  </div>
+</div>
+
+<div class="row" style="display: flex;justify-content: center">
+  <div class="col-11" style="margin-top: 20px">
+
+        <span style="font-weight: bold;margin-left: 50px">Search by Destination : </span>
+        <input type="search" placeholder="Enter Destination.." style="margin-left: 20px;width: 300px;height: 37px" [(ngModel)]="bookingDestination">
+        <button class="btn btn-warning" style="font-weight: bold;margin-left: 20px" (click)="getBookingByDestination()">
+          Search
+        </button>
+
+        <button class="btn btn-warning" style="font-weight: bold;margin-left: 20px" (click)="getAllBookings()">
+          All Bookings
+        </button><br><br><br>
+
+    <div style="width: 100%">
+
+      <table class="table table-striped">
+        <thead  style="text-align: center">
+        <tr>
+          <th scope="col" width="5%">#</th>
+          <th scope="col" width="20%">Booking ID</th>
+          <th scope="col">Driver</th>
+          <th scope="col">Vehicle</th>
+          <th scope="col">Destination</th>
+          <th scope="col">Add Token</th>
+        </tr>
+        </thead>
+        <tbody  style="text-align: center">
+        <tr *ngFor="let booking of bookings; let i = index">
+          <th scope="row">{{i+1}}</th>
+          <td>{{booking.bookingId}}</td>
+          <td>{{booking.driver.userAccount.nameWithInitials}}</td>
+          <td>{{booking.vehicle.vehicleType}}</td>
+          <td>{{booking.destination}}</td>
+          <td (click)="createToken(booking)">
+            <i class="far fa-plus-square fa-lg" style="cursor: pointer; color:blue" title="Add Token"></i>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,80 @@
+<div style="padding-left: 10px;padding-top: 10px;padding-right: 10px;margin-top: 0px">
+
+  <div
+    routerLink="/main/create_user_account"
+    (click)="setTopic('Create User Account')"
+    #createUserAccount="routerLinkActive"
+    routerLinkActive
+    [ngStyle]="{'color':createUserAccount.isActive?'#c0050e':''}">
+    Create User Account
+  </div>
+
+  <div
+    routerLink="/main/user_account_list"
+    (click)="setTopic('User Account List')"
+    #userAccountList="routerLinkActive"
+    routerLinkActive
+    [ngStyle]="{'color':userAccountList.isActive?'#c0050e':''}">
+    User Account List
+  </div>
+
+  <div
+    routerLink="/main/account_requests"
+    (click)="setTopic('Account Requests')"
+    #accountRequests="routerLinkActive"
+    routerLinkActive
+    [ngStyle]="{'color':accountRequests.isActive?'#c0050e':''}">
+    Account Requests
+  </div>
+
+  <div
+    routerLink="/main/transport_requests"
+    (click)="setTopic('Transport Requests')"
+    #transportRequests="routerLinkActive"
+    routerLinkActive
+    [ngStyle]="{'color':transportRequests.isActive?'#c0050e':''}">
+    Transport Requests
+  </div>
+
+  <div
+    routerLink="/main/tv_program"
+    (click)="setTopic('TV Program')"
+    #tvProgram="routerLinkActive"
+    routerLinkActive
+    [ngStyle]="{'color':tvProgram.isActive?'#c0050e':''}">
+    TV Program
+  </div>
+
+  <div
+    routerLink="/main/transport_report"
+    (click)="setTopic('Transport Report')"
+    #transportReport="routerLinkActive"
+    routerLinkActive
+    [ngStyle]="{'color':transportReport.isActive?'#c0050e':''}">
+    Transport Report
+  </div>
+
+  <div
+    routerLink="/main/user_accounts_report"
+    (click)="setTopic('User Accounts Report')"
+    #userAccountsReport="routerLinkActive"
+    routerLinkActive
+    [ngStyle]="{'color':userAccountsReport.isActive?'#c0050e':''}">
+    User Accounts Report
+  </div>
+
+
+  <!--<div style="color: #b56e04">Vehicle</div>-->
+  <!--<div>Driver</div>-->
+
+
+  <!--  <div-->
+  <!--    routerLink="/main/notifications"-->
+  <!--    (click)="setTopic('Notifications')"-->
+  <!--    #notifications="routerLinkActive"-->
+  <!--    routerLinkActive-->
+  <!--    [ngStyle]="{'color':notifications.isActive?'#c0050e':''}">-->
+  <!--    Notifications-->
+  <!--  </div>-->
+</div>
+

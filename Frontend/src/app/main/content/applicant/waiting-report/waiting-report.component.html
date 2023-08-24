@@ -1,0 +1,49 @@
+<div style="margin-top: 50px">
+  <div id="pdf">
+    <div style="margin-top: 20px; margin-left: 40%; font-size: 30px">
+      Waiting Report
+    </div>
+    <hr style="margin-left: 150px;width:75%; border-bottom: 2px solid black">
+    <div class="row" style="display: flex;justify-content: center">
+      <div class="col-10" style="margin-top: 10px">
+
+        <table class="table table-striped" style="margin-top: 40px">
+          <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Application ID</th>
+            <th scope="col">Depature Date</th>
+            <th scope="col">Arrival Date</th>
+            <th scope="col">Reason</th>
+            <th scope="col">Destination</th>
+            <th scope="col">waiting</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let waiting of waiting1; let i = index">
+            <th scope="row">{{i + 1}}</th>
+            <td>{{waiting.applicationID}}</td>
+            <td>{{waiting.depatureDate}}</td>
+            <td>{{waiting.arrivaleDate}}</td>
+            <td>{{waiting.reason}}</td>
+            <td>{{waiting.destination}}</td>
+            <td>{{getDataDiff(waiting.depatureDate)}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div style="margin-top: 20px;margin-left: 420px;">
+
+    <button class="btn btn-warning" style="font-weight: bold;margin-left: 10%" (click)="downloadPdf()">
+      Download Wating Report
+    </button>
+
+    <hr style="margin-top: 80px;margin-bottom: 0px">
+
+  </div>
+
+
+</div>
+

@@ -1,0 +1,89 @@
+<app-alert-box *ngIf="alertBox.alert" [alertMsg]="alertBox"></app-alert-box>
+
+<div class="row" style="display: flex;justify-content: center">
+  <div class="col-12">
+    <span style="font-size: 40px;font-weight: bold;color: black">OT Request Form</span>
+  </div>
+
+  <form #otForm="ngForm" (ngSubmit)="otForm.form.valid && onSubmit()" novalidate>
+
+    <div style="display: flex;margin-top: 50px">
+      <div style="width: 50%;padding-right: 20px">
+        <div class="row">
+          <div class="col-4">
+            OT Date :
+          </div>
+          <div class="col-8">
+            <input type="date" class="form-control"
+                   [(ngModel)]="addOT.otDate"
+                   #otDate="ngModel"
+                   min="{{getMinDate()}}"
+                   name="otDate" required>
+            <div *ngIf="(otDate.touched || otForm.submitted) && otDate.errors?.required"
+                 class="validErr">
+              OverTime Date is required
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 10px">
+          <div class="col-4">
+            Starting Time :
+          </div>
+          <div class="col-8">
+            <input type="time" class="form-control"
+                   [(ngModel)]="addOT.startTime"
+                   #startTime="ngModel"
+                   name="startTime" required>
+            <div *ngIf="(startTime.touched || otForm.submitted) && startTime.errors?.required"
+                 class="validErr">
+              Starting Time is required
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 10px">
+          <div class="col-4">
+            Ending Time :
+          </div>
+          <div class="col-8">
+            <input type="time" class="form-control"
+                   [(ngModel)]="addOT.endTime"
+                   #endTime="ngModel"
+                   name="endTime" required>
+            <div *ngIf="(endTime.touched || otForm.submitted) && endTime.errors?.required"
+                 class="validErr">
+              Ending Time is required
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 10px">
+          <div class="col-4">
+            No of Shifts :
+          </div>
+          <div class="col-8">
+            <input type="number" class="form-control"
+                   [(ngModel)]="addOT.noOfShifts"
+                   (focusout)="addOT.noOfShifts = setNumberPositive(addOT.noOfShifts)"
+                   [(ngModel)]="addOT.noOfShifts"
+                   #noOfShifts="ngModel"
+                   name="noOfShifts" required>
+            <div *ngIf="(noOfShifts.touched || otForm.submitted) && noOfShifts.errors?.required"
+                 class="validErr">
+              Number of shifts is required
+            </div>
+          </div>
+        </div>
+
+        <div class=""
+             style="border-top: 0px solid #dfdfdf;display: flex;margin-top: 20px;padding-top: 20px;margin-bottom: 40px">
+          <div class="col-12" style="text-align: right">
+            <button type="submit" class="btn btn-success" style="font-weight: bold;font-size: 20px">Request OT</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+

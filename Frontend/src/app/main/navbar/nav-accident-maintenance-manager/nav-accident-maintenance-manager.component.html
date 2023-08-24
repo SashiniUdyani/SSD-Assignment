@@ -1,0 +1,71 @@
+<div style="padding-left: 10px;padding-top: 10px;padding-right: 10px;margin-top: 0px">
+
+  <div
+    routerLink="/main/vehicle_accident"
+    (click)="setTopic('Add Accidents')"
+    #addAccidents="routerLinkActive"
+    routerLinkActive
+    [ngStyle]="{'color':addAccidents.isActive?'#c0050e':''}">
+    Add Accidents
+  </div>
+
+  <div
+    routerLink="/main/vehicle_accident_view"
+    (click)="setTopic('View Accidents')"
+    #viewAccidents="routerLinkActive"
+    routerLinkActive
+    [ngStyle]="{'color':viewAccidents.isActive?'#c0050e':''}">
+    View Accidents
+  </div>
+
+  <div
+    style="border: 0px;padding: 0px"
+    routerLink="/main/update_accident_details"
+    #updateAccidentDetails="routerLinkActive"
+    routerLinkActive>
+  </div>
+
+
+
+
+  <div
+    routerLink="/main/vehicle_maintenance"
+    (click)="setTopic('Add Maintenance')"
+    #addMaintenance="routerLinkActive"
+    routerLinkActive
+    [ngStyle]="{'color':addMaintenance.isActive?'#c0050e':''}">
+    Add Maintenance
+  </div>
+
+  <div
+    routerLink="/main/view_maintenance"
+    (click)="setTopic('View Maintenance')"
+    #viewMaintenance="routerLinkActive"
+    routerLinkActive
+    [ngStyle]="{'color':viewMaintenance.isActive?'#c0050e':''}">
+    View Maintenance
+  </div>
+
+
+
+
+  <div
+    routerLink="/main/accident_report"
+    (click)="setTopic('Accident Reports')"
+    #accidentReports="routerLinkActive"
+    routerLinkActive
+    [ngStyle]="{'color':accidentReports.isActive?'#c0050e':''}">
+    Accident Reports
+  </div>
+
+  <div
+    routerLink="/main/maintenance_reports"
+    (click)="setTopic('Maintenance Reports')"
+    #maintenanceReports="routerLinkActive"
+    routerLinkActive
+    [ngStyle]="{'color':maintenanceReports.isActive?'#c0050e':''}">
+    Maintenance Reports
+  </div>
+
+</div>
+

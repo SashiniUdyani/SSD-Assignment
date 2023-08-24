@@ -1,0 +1,80 @@
+<div class="row" style="display: flex;justify-content: center">
+  <div class="col-11" style="margin-top: 20px">
+
+    <!--<div>-->
+    <!--<span style="font-weight: bold">Search by :</span>-->
+    <!--<span style="margin-left: 20px">Deliveries for</span>-->
+    <!--<input type="date" style="margin-left: 20px;height: 37px" [(ngModel)]="deliveryDate">-->
+    <!--<button class="btn btn-warning" style="font-weight: bold;margin-left: 20px" (click)="getAllDeliveriesByDate()">-->
+    <!--Search-->
+    <!--</button>-->
+    <!--</div>-->
+    <div id="pdf">
+    <div style="margin-top: 20px;font-size: 25px">
+      Transport Usage Report
+    </div>
+
+    <table class="table table-striped" style="margin-top: 20px">
+      <thead>
+      <tr>
+        <!--<th scope="col">#</th>-->
+        <th scope="col" width="20%">Passenger Requests</th>
+        <th scope="col" width="20%">Item Requests</th>
+        <th scope="col" width="20%">Item Passenger Requests</th>
+        <th scope="col" width="5%" style="text-align: center">Download</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let deliveryItem of weeklyDeliveries; let i = index">
+        <!--<th scope="row">{{i+1}}</th>-->
+        <td style="font-weight: bold">
+          <span style="color: #0c95cb">Total Requests - {{deliveryItem.pd.deliveries}}</span> <br>
+          <span style="color: #018002">Completed - {{deliveryItem.pd.completed}}
+          </span> <br>
+          <span style="color: #ff0a03">Not-Completed - {{deliveryItem.pd.cancelled}}</span>
+        </td>
+        <td style="font-weight: bold">
+          <span style="color: #0c95cb">Total Requests - {{deliveryItem.id.deliveries}}</span> <br>
+          <span style="color: #018002">Completed - {{deliveryItem.id.completed}}</span> <br>
+          <span style="color: #ff0a03">Not-Completed - {{deliveryItem.id.cancelled}}
+          </span>
+        </td>
+        <td style="font-weight: bold">
+          <span style="color: #0c95cb">Total Requests - {{deliveryItem.pid.deliveries}}
+         </span> <br>
+          <span style="color: #018002">Completed - {{deliveryItem.pid.completed}}</span> <br>
+          <span style="color: #ff0a03">Not-Completed - {{deliveryItem.pid.cancelled}}</span>
+        </td>
+        <td style="text-align: center">
+          <button (click)="sendToPdf()" style="border: none"> <i class="fas fa-download" style="cursor: pointer"></i></button>
+
+        </td>
+        <!--<td style="text-align: center">-->
+        <!--<i class="fas fa-pen" style="cursor: pointer" (click)="goToUpdate(deliveryItem)"></i>-->
+        <!--</td>-->
+      </tr>
+      </tbody>
+    </table>
+
+    <div style="margin-top: 40px;font-size: 25px">
+      Transport requests (Graph)
+    </div>
+
+    <div id="chart" style="margin-top: 40px">
+      <apx-chart
+        [series]="chartOptions.series"
+        [chart]="chartOptions.chart"
+        [dataLabels]="chartOptions.dataLabels"
+        [plotOptions]="chartOptions.plotOptions"
+        [yaxis]="chartOptions.yaxis"
+        [fill]="chartOptions.fill"
+        [stroke]="chartOptions.stroke"
+        [tooltip]="chartOptions.tooltip"
+        [xaxis]="chartOptions.xaxis"
+      ></apx-chart>
+    </div>
+    </div>
+    <hr style="margin-top: 80px;margin-bottom: 80px">
+
+  </div>
+</div>

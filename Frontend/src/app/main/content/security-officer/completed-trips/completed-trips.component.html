@@ -1,0 +1,158 @@
+<div class="row">
+  <div class="col-12">
+
+  </div>
+</div>
+
+<div class="row" style="display: flex;justify-content: center">
+  <div class="col-11" style="margin-top: 20px">
+
+    <span style="font-weight: bold;margin-left: 60px">Search by Token ID : </span>
+    <input type="search" placeholder="Enter TokenID.." style="margin-left: 20px;width: 300px;height: 37px" [(ngModel)]="tokenIdSearch">
+    <button class="btn btn-warning" style="font-weight: bold;margin-left: 20px" (click)="getTokenByID()">
+      Search
+    </button>
+
+    <button class="btn btn-warning" style="font-weight: bold;margin-left: 20px" (click)="getCompletedTokens()">
+      All Completed Trips
+    </button><br><br>
+
+    <span style="font-weight: bold;margin-left: 10px">Search by Destination : </span>
+    <input type="search" placeholder="Enter Destination.." style="margin-left: 15px;width: 200px;height: 37px" [(ngModel)]="bookingDestination">
+    <button class="btn btn-warning" style="font-weight: bold;margin-left: 20px" (click)="getTokenByDestination()">
+      Search
+    </button>
+
+    <span style="font-weight: bold;margin-left: 40px">Search by Driver : </span>
+    <input type="search" placeholder="Enter Driver ID.." style="margin-left: 10px;width: 200px;height: 37px" [(ngModel)]="driverID">
+    <button class="btn btn-warning" style="font-weight: bold;margin-left: 20px" (click)="getTokenByDriverID()">
+      Search
+    </button> <br><br><br>
+
+    <div style="width: 100%">
+
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th scope="col" width="5%">#</th>
+          <th scope="col">Token ID</th>
+          <th scope="col">Driver</th>
+          <th scope="col">Vehicle</th>
+          <th scope="col">Destination</th>
+          <th scope="col">Departure Date</th>
+          <th scope="col">Departure Time</th>
+          <th scope="col" style="text-align: center" width="10%">Get Details</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let tokenDetail of tokens; let i = index">
+          <th scope="row">{{i+1}}</th>
+          <td>{{tokenDetail.tokenID}}</td>
+          <td>{{tokenDetail.driver.driverID}}</td>
+          <td>{{tokenDetail.vehicle.vehicleId}}</td>
+          <td>{{tokenDetail.booking.destination}}</td>
+          <td>{{tokenDetail.departureDate}}</td>
+          <td>{{tokenDetail.departureTime}}</td>
+          <td style="text-align: center">
+            <i class="fas fa-search" style="cursor: pointer" (click)="setToken(tokenDetail)"></i>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div [style.visibility]="isModalTable.openTable?'visible':'hidden'" class="modalTable">
+  <div (click)="isTrueOrFalse(false)"></div>
+  <div style="">
+    <div style="height: 1000px; width: 700px">
+      <div style="">
+        <i (click)="isTrueOrFalse(false)" class="fas fa-times" style="cursor: pointer;margin-right: 10px"></i>
+      </div>
+
+      <div class="" id="SummaryReport" style="border: groove; color: #323130">
+
+        <table width="100%">
+          <br>
+          <div>
+            <h4 style="color: #850606">Independent Television Network</h4>
+            <b>Security Department</b><br>>
+            <b>Completed trip details Report</b>
+          </div>
+          <tr>
+            <td>
+              <div style="font-size: medium; margin-left: 50px">
+                <span style="font-weight: bold">Booking ID : </span>
+                <span style="margin-left: 10px">{{tokenDetail.booking.bookingId}}</span>
+              </div>
+            </td>
+            <td>
+              <div style="font-size: medium; margin-left: 50px">
+                <span style="font-weight: bold">Destination : </span>
+                <span style="margin-left: 10px">{{tokenDetail.booking.destination}}</span>
+              </div>
+            </td>
+          </tr>
+        </table>
+        <br>
+
+        <div style="text-align: center; color: blue">
+          <b><h5><u>Token Details</u></h5></b>
+        </div>
+        <br>
+
+        <div style="font-size: medium; margin-left: 50px">
+          <span style="font-weight: bold">Token ID : </span>
+          <span style="margin-left: 10px">{{tokenDetail.tokenID}}</span>
+        </div>
+
+        <div style="font-size: medium; margin-left: 50px">
+          <span style="font-weight: bold">Departure Date : </span>
+          <span style="margin-left: 10px">{{tokenDetail.departureDate}}</span>
+        </div>
+
+        <div style="font-size: medium; margin-left: 50px">
+          <span style="font-weight: bold">Departure Date : </span>
+          <span style="margin-left: 10px">{{tokenDetail.departureTime}}</span>
+        </div>
+
+        <div style="font-size: medium; margin-left: 50px">
+          <span style="font-weight: bold">Arrival Date : </span>
+          <span style="margin-left: 10px">{{tokenDetail.arrivalDate}}</span>
+        </div>
+
+        <div style="font-size: medium; margin-left: 50px">
+          <span style="font-weight: bold">Arrival Time : </span>
+          <span style="margin-left: 10px">{{tokenDetail.arrivalTime}}</span>
+        </div>
+        <br><br>
+
+        <div style="text-align: center; color: darkgreen">
+         <b><h5><u>Meter Details for Token {{tokenDetail.tokenID}}</u></h5></b>
+        </div>
+        <br>
+
+        <div style="font-size: medium; margin-left: 50px">
+          <span style="font-weight: bold">Meter ID : </span>
+          <span style="margin-left: 10px">{{meterDetail.meterId}}</span>
+        </div>
+        <div style="font-size: medium; margin-left: 50px">
+          <span style="font-weight: bold">In Meter : </span>
+          <span style="margin-left: 10px">{{meterDetail.inMeter}}</span>
+        </div>
+        <div style="font-size: medium; margin-left: 50px">
+          <span style="font-weight: bold">Out Meter : </span>
+          <span style="margin-left: 10px">{{meterDetail.outMeter}}</span>
+        </div>
+        <div style="font-size: medium; margin-left: 50px">
+          <span style="font-weight: bold">Mileage : </span>
+          <span style="margin-left: 10px">{{meterDetail.mileage}}</span>
+        </div>
+
+      </div>
+      <button style="margin-left: 100px" type="button" class="btn btn-danger"
+              (click)="downloadPdf()">Download PDF</button>
+    </div>
+  </div>
+</div>

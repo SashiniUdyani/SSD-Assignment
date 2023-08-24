@@ -1,0 +1,89 @@
+<div class="row">
+  <div class="col-12">
+
+  </div>
+</div>
+
+<div class="row" style="display: flex;justify-content: center">
+  <div class="col-11" style="margin-top: 20px">
+
+    <span style="font-weight: bold;margin-left: 50px">Search by vehicle number : </span>
+    <input type="text" style="margin-left: 20px;width: 300px;height: 37px" [(ngModel)]="vehicleNumber">
+    <button class="btn btn-warning" style="font-weight: bold;margin-left: 20px" (click)="getVehicleByNumber()">
+      Search
+    </button>
+
+    <button class="btn btn-warning" style="font-weight: bold;margin-left: 20px" (click)="getAllVehicles()">
+      All vehicles
+    </button>
+
+    <table class="table table-striped" style="margin-top: 40px">
+      <thead>
+      <tr>
+        <th scope="col" width="5%">#</th>
+        <th scope="col" width="20%">Vehicle Number</th>
+        <th scope="col" width="10%">Vehicle Type</th>
+        <th scope="col" width="10%">Fuel Type</th>
+        <th scope="col" width="10%">Fuel Balance</th>
+        <th scope="col" width="10%" style="text-align: left">Update Fuel Balance</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let vehicle of vehicles; let i = index">
+        <th scope="row">{{i+1}}</th>
+        <td>{{vehicle.vehicleId}}</td>
+        <td>{{vehicle.vehicleType}}</td>
+        <td>{{vehicle.fuelType}}</td>
+        <td>{{vehicle.fuelBalance}}</td>
+        <td>
+          <i class="fas fa-pen" style="cursor: pointer" (click)="goToUpdate(vehicle) "></i>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
+
+
+<div class="modalTable" [style.visibility]="isModalTable.openTable?'visible':'hidden'">
+  <div (click)="isTrueOrFalse(false)"></div>
+  <div style="">
+    <div style="max-height: 300px">
+      <div style="min-width: 1000px">
+        <i class="fas fa-times" style="cursor: pointer;margin-right: 10px"></i>
+      </div>
+
+        <div style="font-size: 20px;margin-top: 20px">
+          Update current Fuel Balance
+        </div>
+        <div style="display: flex;justify-content: center">
+          <form #fuelUpdateForm="ngForm" (ngSubmit)="fuelUpdateForm.form.valid && onSubmit()" novalidate>
+            <div class="row" style="margin-top: 10px">
+              <div class="col-5">
+                Fuel Balance :
+              </div>
+              <div class="col-7">
+                <input type="number" class="form-control"
+                       [(ngModel)]="selectedVehicle.fuelBalance"
+                       (focusout)="selectedVehicle.fuelBalance = setNumberPositive(selectedVehicle.fuelBalance)"
+                       #fuel="ngModel"
+                       name="fuel" required>
+                <div *ngIf="(fuel.touched || fuelUpdateForm.submitted) && fuel.errors?.required"
+                     class="validErr">
+                  Fuel Balance is required
+                </div>
+              </div>
+            </div>
+            <div class=""
+                 style="border-top: 0px solid #dfdfdf;display: flex;margin-top: 20px;padding-top: 20px;margin-bottom: 40px">
+              <div class="col-12" style="text-align: right">
+                <button type="submit" class="btn btn-success" style="font-weight: bold;font-size: 20px">Submit</button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+</div>

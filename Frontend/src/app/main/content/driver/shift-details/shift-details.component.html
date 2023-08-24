@@ -1,0 +1,91 @@
+<div class="row">
+  <div class="col-12">
+
+  </div>
+</div>
+
+<div class="row" style="display: flex;justify-content: center">
+  <div class="col-11" style="margin-top: 20px">
+    <label><h1><b>Shift Details</b></h1></label>
+
+
+    <table class="table table-striped" style="margin-top: 40px" >
+      <tbody *ngIf="shift">
+      <tr>
+        <td>Shift ID</td>
+        <td>{{shift.shiftId}}</td>
+      </tr>
+      <tr>
+        <td>Shift Date</td>
+        <td>{{shift.shiftDate}}</td>
+      </tr>
+      <tr>
+        <td>Start Time</td>
+        <td>{{shift.startingTime}}</td>
+      </tr>
+      <tr>
+        <td>End Time</td>
+        <td>{{shift.endingTime}}</td>
+      </tr>
+      </tbody>
+    </table>
+
+    <div class=""
+         style="border-top: 0px solid #dfdfdf;display: flex;margin-top: 20px;padding-top: 20px;margin-bottom: 40px">
+      <div class="col-12" style="text-align: right">
+        <button class="btn btn-success" style="font-weight: bold;font-size: 20px" (click)="goToUpdate(shift)">Mark Attendance</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="modalTable" [style.visibility]="isModalTable.openTable?'visible':'hidden'">
+  <div (click)="isTrueOrFalse(false)"></div>
+  <div style="">
+    <div style="max-height: calc(100vh - 100px);overflow-y: scroll">
+      <div style="min-width: 1390px;">
+        <i class="fas fa-times" style="cursor: pointer;margin-right: 10px" (click)="isTrueOrFalse(false)"></i>
+      </div>
+
+      <div class="">
+        <div style="font-size: 25px;color: red;font-weight: bold"
+             *ngIf="!shift.attendance">
+          You have not marked the attendance
+        </div>
+        <div style="font-size: 25px;color: green;font-weight: bold"
+             *ngIf="shift.attendance">
+          You have successfully marked the attendance
+        </div>
+
+        <div style="display: flex;justify-content: center;margin-top: 40px">
+          <button type="submit" class="btn btn-success" style="font-weight: bold; margin-right: 20px"
+                  (click)="attencanceMarked(true)">Mark the Attendance
+          </button>
+        </div>
+
+      </div>
+
+      <div class="">
+        <div style="font-size: 25px;color: green;font-weight: bold"
+             *ngIf="!shift.attendance">
+          You can start the transport right now
+
+        </div>
+        <div style="font-size: 25px;color: red;font-weight: bold"
+             *ngIf="shift.attendance">
+          You have not started a transport yet
+        </div>
+
+        <div style="display: flex;justify-content: center;margin-top: 40px">
+          <button type="submit" class="btn btn-success" style="font-weight: bold; margin-right: 20px"
+                  (click)="attencanceMarked(false)">Start the transport
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+

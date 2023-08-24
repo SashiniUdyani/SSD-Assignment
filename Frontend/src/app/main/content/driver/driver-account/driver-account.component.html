@@ -1,0 +1,68 @@
+<app-alert-box *ngIf="alertBox.alert" [alertMsg]="alertBox"></app-alert-box>
+<div class="row">
+  <div class="col-12">
+
+  </div>
+</div>
+
+<div class="row" style="display: flex;justify-content: center">
+  <div class="col-11" style="margin-top: 20px">
+    <label><h1><b>My Account</b></h1></label>
+
+
+    <table class="table table-striped" style="margin-top: 40px" >
+      <tbody>
+        <tr>
+          <td>Driver ID</td>
+          <td>{{driver.driverID}}</td>
+        </tr>
+        <tr>
+          <td>Name</td>
+          <td>{{driver.userAccount.name}}</td>
+        </tr>
+        <tr>
+          <td>NIC</td>
+          <td>{{driver.userAccount.nic}}</td>
+        </tr>
+        <tr>
+          <td>Date of Birth</td>
+          <td>{{driver.userAccount.dob}}</td>
+        </tr>
+        <tr>
+          <td>Address</td>
+          <td>{{driver.userAccount.address}}</td>
+        </tr>
+        <tr>
+          <td>Contact Number</td>
+          <td>{{driver.userAccount.contactNo}}</td>
+        </tr>
+        <tr>
+          <td>Email</td>
+          <td>{{driver.userAccount.email}}</td>
+        </tr>
+        <tr>
+          <td>Registered Date</td>
+          <td>{{driver.userAccount.registeredDate}}</td>
+        </tr>
+        <tr>
+          <td>Name With Initials</td>
+          <td>{{driver.userAccount.nameWithInitials}}</td>
+        </tr>
+        <tr>
+          <td>License ID</td>
+          <td>{{driver.lisenseID}}</td>
+        </tr>
+      <tr>
+        <td><button class="btn btn-success" style="font-weight: bold;font-size: 20px" (click)="goToUpdate()">Update Details</button> </td>
+        <td><button class="btn btn-success" style="font-weight: bold;font-size: 20px" (click)="deleteDriver()">Delete Account</button> </td>
+
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
+
+
+
+
